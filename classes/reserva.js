@@ -1,5 +1,4 @@
 
-
 class Reserva {
     constructor( fecha, hora, nombreBarbero, ciCliente, nombreCliente) {
       this.fecha = fecha;

@@ -1,10 +1,8 @@
 class Barbero {
-    constructor(nombre, apellido, especialidad, experiencia, disponible) {
+    constructor(nombre, apellido, especialidad) {
       this.nombre = nombre;
       this.apellido = apellido;
       this.especialidad = especialidad;
-      this.experiencia = experiencia;
-      this.disponible = disponible;
     }
 }
 
