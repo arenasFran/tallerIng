@@ -3,14 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <title>Login Admin</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #232526 0%, #393e46 100%);
+      color: #e0c9a6;
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #loginForm {
+      background: rgba(34, 40, 49, 0.95);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      padding: 32px 28px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-width: 320px;
+      max-width: 90vw;
+    }
+    #loginForm input {
+      background: #393e46;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #e0c9a6;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      outline: none;
+      transition: box-shadow 0.2s;
+    }
+    #loginForm input:focus {
+      box-shadow: 0 0 0 2px #e84545;
+    }
+    #loginForm button {
+      background: linear-gradient(90deg, #e84545 0%, #903749 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 8px rgba(232, 69, 69, 0.15);
+      transition: background 0.2s, transform 0.1s;
+    }
+    #loginForm button:hover {
+      background: linear-gradient(90deg, #903749 0%, #e84545 100%);
+      transform: translateY(-2px) scale(1.03);
+    }
+    .error-message {
+      color: #e84545;
+      background: rgba(232, 69, 69, 0.08);
+      border-radius: 6px;
+      padding: 8px 0 0 0;
+      font-size: 0.98rem;
+      min-height: 22px;
+      text-align: center;
+    }
+    h2 {
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #e0c9a6;
+      margin-bottom: 24px;
+    }
+    @media (max-width: 500px) {
+      #loginForm {
+        padding: 18px 8px 14px 8px;
+        min-width: unset;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h2>Login de Administrador</h2>
 
   <form id="loginForm">
+    <h2>Login de Administrador</h2>
     <input type="text" id="usuario" placeholder="Usuario" required>
     <input type="password" id="password" placeholder="Contraseña" required>
     <button type="submit">Ingresar</button>
+    <div id="error" class="error-message"></div>
   </form>
 
   <script>
