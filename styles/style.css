@@ -321,3 +321,48 @@ body {
 .cta-button:active {
   transform: translateY(0);
 }
+
+.footer {
+  background-color: #1E1E1E;
+  color: #F5F5F5;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-contenedor {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.footer-redes a {
+  display: block;
+  color: #F5F5F5;
+  margin-bottom: 10px;
+  text-decoration: none;
+  font-size: 1.1em;
+}
+
+.footer-redes a i {
+  margin-right: 10px;
+  color: #B38B6D;
+}
+
+.footer-contacto p {
+  margin: 8px 0;
+  font-size: 1em;
+}
+
+.footer-contacto i {
+  margin-right: 10px;
+  color: #B38B6D;
+}
+
+.footer-mapa iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 8px;
+}

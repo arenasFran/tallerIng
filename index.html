@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barbería Estilo Clásico</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -128,10 +129,60 @@
         </div>
       </section>
     
-      <footer id="contacto">
-        <h2>Contacto</h2>
-        <p>Email, redes sociales, ubicación...</p>
+      <footer class="footer">
+        <div class="footer-contenedor">
+
+          <!-- Redes sociales -->
+          <div class="footer-redes">
+            <h4>Redes Sociales</h4>
+            <a href="https://instagram.com/estiloclasicobarber" target="_blank">
+              <i class="fab fa-instagram"></i> @estiloclasicobarber
+            </a>
+            <a href="https://facebook.com/estiloclasicobarber" target="_blank">
+              <i class="fab fa-facebook-f"></i> Estilo Clásico Barber
+            </a>
+            <a href="https://twitter.com/estiloclasicobarber" target="_blank">
+              <i class="fab fa-x-twitter"></i> @estiloclasicobarber
+            </a>
+            <a href="https://tiktok.com/@estiloclasicobarber" target="_blank">
+              <i class="fab fa-tiktok"></i> @estiloclasicobarber
+            </a>
+            <a href="https://linkedin.com/company/estiloclasicobarber" target="_blank">
+              <i class="fab fa-linkedin-in"></i> Estilo Clásico Barber
+            </a>
+          </div>
+
+          <!-- Datos de contacto -->
+          <div class="footer-contacto">
+            <h4>Contacto</h4>
+            <p><i class="fas fa-phone"></i> +598 91 234 567</p>
+            <p><i class="fas fa-envelope"></i> estiloclasicobarber@gmail.com</p>
+            <p><i class="fas fa-map-marker-alt"></i> <span id="direccion-footer">[Ingresar dirección aquí]</span></p>
+          </div>
+
+          <!-- Mapa -->
+          <div class="footer-mapa">
+            <h4>Cómo llegar</h4>
+            <iframe 
+              src="https://www.google.com/maps?q=direccion+montevideo&output=embed"
+              width="100%" height="200" style="border:0;" allowfullscreen=""
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+
+        </div>
+
+        <!-- Línea final -->
+        <div class="footer-bottom">
+          <p>&copy; <span id="año-actual"></span> Estilo Clásico Barber. Todos los derechos reservados.</p>
+        </div>
       </footer>
+
+      <!-- Script para año dinámico -->
+
+
+
 </body>
 <script type="module" src="app.js"></script>
+<script>document.getElementById("año-actual").textContent = new Date().getFullYear();</script>
 </html>
