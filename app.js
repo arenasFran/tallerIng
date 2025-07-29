@@ -2,9 +2,10 @@ import Reserva from "./classes/reserva.js";
 import Barbero from "./classes/barbero.js";
 import Servicio from "./classes/servicios.js";
 
-// Load existing bookings from localStorage
 const saved = localStorage.getItem('reservas');
 const reservas = saved ? JSON.parse(saved) : [];
+
+
 
 
 const servicios = [
@@ -117,5 +118,5 @@ if (bookingList) {
   renderBookings();
 }
 
-export { reservas };
+
 

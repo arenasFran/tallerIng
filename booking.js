@@ -1,12 +1,18 @@
-// calendarBooking.js
+import Reserva from "./classes/reserva.js";
+
+let reservas = [];
+const reservasGuardadas = localStorage.getItem("reservas");
+if (reservasGuardadas) {
+  reservas = JSON.parse(reservasGuardadas);
+}
+
 
 const fechaInput = document.getElementById("fecha");
 const horaSelect = document.getElementById("horaSelect");
+const bookingForm = document.getElementById("bookingForm");
+const feedback = document.getElementById("bookingFeedback");
 
-// Objeto para guardar reservas temporales por fecha
-const reservasPorFecha = {};
 
-// Genera horarios de 09:00 a 21:00 cada 30 min
 function generarHorarios() {
   const horarios = [];
   for (let h = 9; h <= 21; h++) {
@@ -16,12 +22,13 @@ function generarHorarios() {
   return horarios;
 }
 
-// Carga opciones de horas para la fecha seleccionada
-function cargarHoras(fecha) {
+
+function actualizarHoras(fecha) {
   horaSelect.innerHTML = "";
+
   if (!fecha) {
     horaSelect.disabled = true;
-    horaSelect.innerHTML = "<option>Seleccione una fecha primero</option>";
+    horaSelect.innerHTML = `<option value="">Seleccione una fecha primero</option>`;
     return;
   }
 
@@ -29,20 +36,22 @@ function cargarHoras(fecha) {
 
   const horarios = generarHorarios();
 
-  // Obtener horas ya reservadas para esta fecha
-  const reservadas = reservasPorFecha[fecha] || [];
 
-  // Opción vacía
+  const horasReservadas = reservas
+    .filter((r) => r.fecha === fecha)
+    .map((r) => r.hora);
+
+
   const opcionVacia = document.createElement("option");
   opcionVacia.value = "";
   opcionVacia.textContent = "Seleccione una hora";
   horaSelect.appendChild(opcionVacia);
 
-  horarios.forEach(hora => {
+  horarios.forEach((hora) => {
     const opcion = document.createElement("option");
     opcion.value = hora;
     opcion.textContent = hora;
-    if (reservadas.includes(hora)) {
+    if (horasReservadas.includes(hora)) {
       opcion.disabled = true;
       opcion.textContent += " (Reservado)";
     }
@@ -50,32 +59,55 @@ function cargarHoras(fecha) {
   });
 }
 
-// Evento al cambiar fecha
-fechaInput.addEventListener("change", () => {
-  cargarHoras(fechaInput.value);
-  // Reiniciar hora seleccionada
+
+fechaInput.addEventListener("change", (e) => {
+  actualizarHoras(e.target.value);
   horaSelect.value = "";
 });
 
-// Evento al seleccionar una hora
-horaSelect.addEventListener("change", () => {
+bookingForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
   const fecha = fechaInput.value;
   const hora = horaSelect.value;
-  if (!fecha || !hora) return;
+  const nombreBarbero = document.getElementById("barberoSelect").value;
+  const ciCliente = document.getElementById("ciCliente").value.trim();
+  const nombreCliente = document.getElementById("nombreCliente").value.trim();
+  const servicio = document.getElementById("servicioSelect").value;
 
-  // Guardar hora como reservada para la fecha
-  if (!reservasPorFecha[fecha]) {
-    reservasPorFecha[fecha] = [];
+  if (!fecha || !hora || !nombreBarbero || !ciCliente || !nombreCliente || !servicio) {
+    alert("Por favor, completa todos los campos.");
+    return;
   }
-  reservasPorFecha[fecha].push(hora);
 
-  // Recargar horas para actualizar el select y deshabilitar la hora elegida
-  cargarHoras(fecha);
 
-  // Resetear valor para que el usuario pueda elegir otro horario si quiere
-  horaSelect.value = "";
+  const yaReservado = reservas.some(
+    (r) => r.fecha === fecha && r.hora === hora
+  );
+  if (yaReservado) {
+    alert("Esa hora ya está reservada, por favor elige otra.");
+    return;
+  }
+
+
+  const nuevaReserva = new Reserva(fecha, hora, nombreBarbero, ciCliente, nombreCliente, servicio);
+  reservas.push(nuevaReserva);
+
+
+  localStorage.setItem("reservas", JSON.stringify(reservas));
+
+
+  feedback.textContent = "¡Reserva realizada con éxito!";
+  feedback.classList.add("show-feedback");
+  setTimeout(() => {
+    feedback.textContent = "";
+    feedback.classList.remove("show-feedback");
+  }, 3000);
+
+ 
+  bookingForm.reset();
+  actualizarHoras(fecha);
 });
 
-// Inicializar select deshabilitado
-horaSelect.disabled = true;
-horaSelect.innerHTML = "<option>Seleccione una fecha primero</option>";
+
+actualizarHoras(null); 
