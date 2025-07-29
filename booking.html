@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservar un turno | Barbería Estilo Clásico</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+  <header>
+    <h1>Reservar un turno</h1>
+    <nav>
+      <a href="index.html">Volver al inicio</a>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <form id="bookingForm">
+        <h2>Completa tu reserva</h2>
+        <input type="date" id="fecha" required>
+        <input type="time" id="hora" required>
+        <input type="text" id="nombreBarbero" placeholder="Barbero" required>
+        <input type="text" id="ciCliente" placeholder="CI Cliente" required>
+        <input type="text" id="nombreCliente" placeholder="Nombre Cliente" required>
+        <button type="submit" class="main-action-btn">Reservar</button>
+        <div id="bookingFeedback"></div>
+      </form>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html> 
