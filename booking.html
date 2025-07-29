@@ -13,22 +13,34 @@
       <a href="index.html">Volver al inicio</a>
     </nav>
   </header>
+
   <main>
-    <section>
+    <section class="reserva-container">
       <form id="bookingForm">
         <h2>Completa tu reserva</h2>
+
         <label for="servicioSelect">Servicio:</label>
         <select id="servicioSelect" required></select>
+
         <label for="barberoSelect">Barbero:</label>
         <select id="barberoSelect" required></select>
-        <input type="date" id="fecha" required>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" required />
+
+        <label for="horaSelect">Hora:</label>
         <select id="horaSelect" required>
           <option value="">Seleccione una fecha primero</option>
         </select>
-        
-        <input type="text" id="ciCliente" placeholder="CI Cliente" required>
-        <input type="text" id="nombreCliente" placeholder="Nombre Cliente" required>
+
+        <label for="ciCliente">CI Cliente:</label>
+        <input type="text" id="ciCliente" placeholder="CI Cliente" required />
+
+        <label for="nombreCliente">Nombre Cliente:</label>
+        <input type="text" id="nombreCliente" placeholder="Nombre Cliente" required />
+
         <button type="submit" class="main-action-btn">Reservar</button>
+
         <div id="bookingFeedback"></div>
       </form>
     </section>
