@@ -1,0 +1,112 @@
+:root {
+      --color-bg-dark:       #121212;
+      --color-bg-section:    #1E1E1E;
+      --color-secondary:     #2D2D2D;
+      --color-accent:        #354A3C;
+      --color-tertiary:      #5E4B3B;
+      --color-text-primary:   #F5F5F5;
+      --color-text-secondary: #CCCCCC;
+      --color-warm-accent:    #B38B6D;
+    }
+
+    /* Body y fondo general */
+    body {
+      margin: 0;
+      background: var(--color-bg-dark);
+      font-family: Arial, sans-serif;
+    }
+
+    /* Sección del equipo */
+    #equipo-barberos {
+      background: var(--color-bg-section);
+      padding: 2rem;
+    }
+
+    /* Título */
+    .barberos-titulo {
+      color: var(--color-text-primary);
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Grid responsive */
+    .equipo {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    /* Tarjeta */
+    .barbero {
+      background: var(--color-secondary);
+      border: 2px solid var(--color-tertiary);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .barbero:hover{
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Imagen con efecto zoom ligero */
+    .imagen-barbero {
+      display: block;
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    /* Info */
+    .info-barbero {
+      padding: 1rem;
+    }
+    .team-card__name {
+      margin: 0 0 0.5rem;
+      color: var(--color-text-primary);
+      font-size: 1.25rem;
+    }
+    .team-card__role {
+      margin: 0;
+      color: var(--color-text-secondary);
+      font-size: 1rem;
+    }
+
+    /* Lightbox */
+    #lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1000;
+    }
+    #lightbox.visible {
+      visibility: visible;
+      opacity: 1;
+    }
+    #lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 4px;
+    }
+
+    /* Ajustes móviles */
+    @media (max-width: 400px) {
+      .barberos-titulo {
+        font-size: 1.5rem;
+      }
+      .team-card__name {
+        font-size: 1.1rem;
+      }
+    }
