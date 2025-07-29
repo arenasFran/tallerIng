@@ -6,7 +6,7 @@ import Servicio from "./classes/servicios.js";
 const saved = localStorage.getItem('reservas');
 const reservas = saved ? JSON.parse(saved) : [];
 
-// Array of available barber services
+
 const servicios = [
   new Servicio('Corte', 500),
   new Servicio('Barba', 300),
@@ -15,7 +15,7 @@ const servicios = [
   new Servicio('Colorimetría', 800)
 ];
 
-// Array of available barbers
+
 const barberos = [
   new Barbero('Joaquín', 'Rojas', 'Especialista en fades'),
   new Barbero('Matías', 'Suárez', 'Maestro de navaja'),
