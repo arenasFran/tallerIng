@@ -97,3 +97,63 @@ footer h2 {
     font-size: 2rem;
   }
 }
+
+#servicios {
+  background-color: #2D2D2D;
+  padding: 80px 20px;
+  color: #F5F5F5;
+}
+
+.contenedor-servicios {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.lista-servicios {
+  flex: 1 1 350px;
+}
+
+.lista-servicios h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #F5F5F5;
+}
+
+.lista-servicios ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lista-servicios li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #F5F5F5;
+}
+
+.lista-servicios li img {
+  width: 40px;
+  height: auto;
+  filter: brightness(0) invert(1); /* Blanco sobre fondo oscuro */
+}
+
+.imagen-servicio {
+  flex: 1 1 500px;
+}
+
+.imagen-servicio img {
+  width: 100%;
+  max-width: 500px;
+  border: 2px solid #5E4B3B;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
