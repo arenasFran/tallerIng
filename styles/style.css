@@ -1,3 +1,4 @@
+
 :root {
       --color-bg-dark:       #121212;
       --color-bg-section:    #1E1E1E;
@@ -7,13 +8,6 @@
       --color-text-primary:   #F5F5F5;
       --color-text-secondary: #CCCCCC;
       --color-warm-accent:    #B38B6D;
-    }
-
-    /* Body y fondo general */
-    body {
-      margin: 0;
-      background: var(--color-bg-dark);
-      font-family: Arial, sans-serif;
     }
 
     /* Sección del equipo */
@@ -101,12 +95,167 @@
       border-radius: 4px;
     }
 
-    /* Ajustes móviles */
-    @media (max-width: 400px) {
-      .barberos-titulo {
+body {
+  background: linear-gradient(135deg, #232526 0%, #393e46 100%);
+  color: #f5f7fa;
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 0 0 0;
+  background: none;
+}
+
+h1 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: #f5f7fa;
+  margin: 0 0 18px 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+nav {
+  display: flex;
+  gap: 32px;
+  background: rgba(57, 62, 70, 0.98);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.18);
+  padding: 12px 32px;
+  margin-bottom: 32px;
+}
+
+nav a {
+  color: #e0c9a6;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+
+nav a:hover, nav a:focus {
+  background: #e84545;
+  color: #fff;
+}
+
+section {
+  max-width: 700px;
+  margin: 32px auto;
+  background: rgba(44, 49, 60, 0.96);
+  border-radius: 14px;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.18);
+  padding: 32px 28px;
+  color: #f5f7fa;
+}
+
+section h2 {
+  font-size: 2rem;
+  color: #e0c9a6;
+  margin-top: 0;
+}
+
+footer {
+  background: rgba(34, 40, 49, 0.98);
+  color: #e0c9a6;
+  text-align: center;
+  padding: 32px 0 18px 0;
+  border-radius: 14px 14px 0 0;
+  margin-top: 48px;
+  box-shadow: 0 -2px 12px 0 rgba(0,0,0,0.18);
+}
+
+footer h2 {
+  color: #e84545;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 8px;
+  }
+  section {
+    padding: 16px 6px;
+  }
+  header {
+    padding-top: 24px;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  .barberos-titulo {
         font-size: 1.5rem;
       }
       .team-card__name {
         font-size: 1.1rem;
       }
-    }
+}
+
+#servicios {
+  background-color: #2D2D2D;
+  padding: 80px 20px;
+  color: #F5F5F5;
+}
+
+.contenedor-servicios {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.lista-servicios {
+  flex: 1 1 350px;
+}
+
+.lista-servicios h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #F5F5F5;
+}
+
+.lista-servicios ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lista-servicios li {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #F5F5F5;
+}
+
+.lista-servicios li img {
+  width: 40px;
+  height: auto;
+  filter: brightness(0) invert(1); /* Blanco sobre fondo oscuro */
+}
+
+.imagen-servicio {
+  flex: 1 1 500px;
+}
+
+.imagen-servicio img {
+  width: 100%;
+  max-width: 500px;
+  border: 2px solid #5E4B3B;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
