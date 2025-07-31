@@ -6,8 +6,6 @@ const saved = localStorage.getItem('reservas');
 const reservas = saved ? JSON.parse(saved) : [];
 
 
-
-
 const servicios = [
   new Servicio('Corte', 500),
   new Servicio('Barba', 300),
@@ -160,4 +158,4 @@ if (bookingList) {
 }
 
 
-
+export { Reserva, Servicio, Barbero, loadSelects };
