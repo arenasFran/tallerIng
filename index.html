@@ -1,187 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barbería Estilo Clásico</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barbería Estilo Clásico</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
-    <header>
-        <h1>Barbería Estilo Clásico</h1>
-        <nav>
-          <a href="#landing">Inicio</a>
-          <a href="#servicios">Servicios</a>
-          <a href="#galeria">Galería</a>
-          <a href="#contacto">Contacto</a>
-          <a href="admin/login.html">Login Admin</a>
-        </nav>
-      </header>
-    
-      <div id="landing">
-        <a href="booking.html" class="cta-button">Reserva Ahora</a>
+  <header>
+    <h1>Barbería Estilo Clásico</h1>
+    <nav>
+      <a href="#landing">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#galeria">Galería</a>
+      <a href="#contacto">Contacto</a>
+      <a href="admin/login.html">Login Admin</a>
+    </nav>
+  </header>
+
+  <div id="landing">
+    <a href="booking.html" class="cta-button">Reserva Ahora</a>
+  </div>
+
+  <section class="servicios-section" id="servicios">
+    <h2 class="titulo-principal">Nuestros Servicios</h2>
+    <div class="servicios-grid">
+
+      <div class="servicio-card">
+        <div class="servicio-titulo">Corte</div>
+        <div class="servicio-desc">Corte clásico o moderno, adaptado a tu estilo personal.</div>
+        <div class="servicio-precio">$ 500</div>
       </div>
-    
-      <section class="servicios-section">
-        <h2 class="titulo-principal">Nuestros Servicios</h2>
-        <div class="servicios-grid">
 
-          <div class="servicio-card">
-            <div class="servicio-titulo">Corte</div>
-            <div class="servicio-desc">Corte clásico o moderno, adaptado a tu estilo personal.</div>
-            <div class="servicio-precio">$ 500</div>
-          </div>
+      <div class="servicio-card">
+        <div class="servicio-titulo">Barba</div>
+        <div class="servicio-desc">Perfilado, recorte y tratamiento de barba con toalla caliente.</div>
+        <div class="servicio-precio">$ 300</div>
+      </div>
 
-          <div class="servicio-card">
-            <div class="servicio-titulo">Barba</div>
-            <div class="servicio-desc">Perfilado, recorte y tratamiento de barba con toalla caliente.</div>
-            <div class="servicio-precio">$ 300</div>
-          </div>
+      <div class="servicio-card">
+        <div class="servicio-titulo">Corte Premium</div>
+        <div class="servicio-desc">Experiencia completa: corte, lavado y estilo con productos premium.</div>
+        <div class="servicio-precio">$ 1000</div>
+      </div>
 
-          <div class="servicio-card">
-            <div class="servicio-titulo">Corte Premium</div>
-            <div class="servicio-desc">Experiencia completa: corte, lavado y estilo con productos premium.</div>
-            <div class="servicio-precio">$ 1000</div>
-          </div>
+      <div class="servicio-card">
+        <div class="servicio-titulo">Colorimetría</div>
+        <div class="servicio-desc">Asesoramiento y aplicación de color para un look renovado.</div>
+        <div class="servicio-precio">$ 800</div>
+      </div>
 
-          <div class="servicio-card">
-            <div class="servicio-titulo">Colorimetría</div>
-            <div class="servicio-desc">Asesoramiento y aplicación de color para un look renovado.</div>
-            <div class="servicio-precio">$ 800</div>
-          </div>
+      <div class="servicio-card">
+        <div class="servicio-titulo">Lavado</div>
+        <div class="servicio-desc">Lavado capilar con productos de alta calidad y masaje relajante.</div>
+        <div class="servicio-precio">$ 200</div>
+      </div>
+    </div>
+  </section>
 
-          <div class="servicio-card">
-            <div class="servicio-titulo">Lavado</div>
-            <div class="servicio-desc">Lavado capilar con productos de alta calidad y masaje relajante.</div>
-            <div class="servicio-precio">$ 200</div>
-          </div>
-        </div>
-      </section>
+  <section class="equipo" id="equipo">
+    <div class="barbero">
+      <img src="/barberos/imgs/barbero1.png" alt="Foto de Joaquín Rojas" class="imagen-barbero" />
+      <div class="info-barbero">
+        <h3 class="team-card__name">Joaquín Rojas</h3>
+        <p class="team-card__role">Especialista en fades</p>
+      </div>
+    </div>
 
-      <section class="equipo">
-        <div class="barbero">
-            <img src="/barberos/imgs/barbero1.png" alt="Foto de Joaquín Rojas" class="imagen-barbero" />
-            <div class="info-barbero">
-                <h3 class="team-card__name">Joaquín Rojas</h3>
-                <p class="team-card__role">Especialista en fades</p>
-            </div>
-        </div>
+    <div class="barbero">
+      <img src="/barberos/imgs/barbero2.png" alt="Foto de Matías Suárez" class="imagen-barbero" />
+      <div class="info-barbero">
+        <h3 class="team-card__name">Matías Suárez</h3>
+        <p class="team-card__role">Maestro de navaja</p>
+      </div>
+    </div>
 
-        <div class="barbero">
-            <img src="/barberos/imgs/barbero2.png" alt="Foto de Matías Suárez" class="imagen-barbero" />
-            <div class="info-barbero">
-                <h3 class="team-card__name">Matías Suárez</h3>
-                <p class="team-card__role">Maestro de navaja</p>
-            </div>
-        </div>
+    <div class="barbero">
+      <img src="/barberos/imgs/barbero3.png" alt="Foto de Ignacio Pereira" class="imagen-barbero" />
+      <div class="info-barbero">
+        <h3 class="team-card__name">Ignacio Pereira</h3>
+        <p class="team-card__role">Artista de barbas</p>
+      </div>
+    </div>
 
-        <div class="barbero">
-            <img src="/barberos/imgs/barbero3.png" alt="Foto de Ignacio Pereira" class="imagen-barbero" />
-            <div class="info-barbero">
-                <h3 class="team-card__name">Ignacio Pereira</h3>
-                <p class="team-card__role">Artista de barbas</p>
-            </div>
-        </div>
+    <div class="barbero">
+      <img src="/barberos/imgs/barbero4.png" alt="Foto de Sebastián Delgado" class="imagen-barbero" />
+      <div class="info-barbero">
+        <h3 class="team-card__name">Sebastián Delgado</h3>
+        <p class="team-card__role">Colorista profesional</p>
+      </div>
+    </div>
 
-        <div class="barbero">
-            <img src="/barberos/imgs/barbero4.png" alt="Foto de Sebastián Delgado" class="imagen-barbero" />
-            <div class="info-barbero">
-                <h3 class="team-card__name">Sebastián Delgado</h3>
-                <p class="team-card__role">Colorista profesional</p>
-            </div>
-        </div>
+    <div class="barbero">
+      <img src="/barberos/imgs/barbero5.png" alt="Foto de Lucas Méndez" class="imagen-barbero" />
+      <div class="info-barbero">
+        <h3 class="team-card__name">Lucas Méndez</h3>
+        <p class="team-card__role">Terapeuta capilar</p>
+      </div>
+    </div>
 
-        <div class="barbero">
-            <img src="/barberos/imgs/barbero5.png" alt="Foto de Lucas Méndez" class="imagen-barbero" />
-            <div class="info-barbero">
-                <h3 class="team-card__name">Lucas Méndez</h3>
-                <p class="team-card__role">Terapeuta capilar</p>
-            </div>
-        </div>
+    <div class="barbero">
+      <img src="/barberos/imgs/barbero6.png" alt="Foto de Diego Montes" class="imagen-barbero" />
+      <div class="info-barbero">
+        <h3 class="team-card__name">Diego Montes</h3>
+        <p class="team-card__role">Estilista vintage</p>
+      </div>
+    </div>
+  </section>
 
-        <div class="barbero">
-            <img src="/barberos/imgs/barbero6.png" alt="Foto de Diego Montes" class="imagen-barbero" />
-            <div class="info-barbero">
-                <h3 class="team-card__name">Diego Montes</h3>
-                <p class="team-card__role">Estilista vintage</p>
-            </div>
-        </div>
-      </section>
-    
-      <section id="galeria" class="equipo">
-        <h2>Galería de cortes</h2>
-        <div class="barbero">
-            <img src="img/trabajos/trabajo1.png" class="imagen-barbero" />
-        </div>
-        <div class="barbero">
-            <img src="img/trabajos/trabajo2.png" class="imagen-barbero" />
-        </div>
-        <div class="barbero">
-            <img src="img/trabajos/trabajo3.png" class="imagen-barbero" />
-        </div>
-        <div class="barbero">
-            <img src="img/trabajos/trabajo4.png" class="imagen-barbero" />
-        </div>
-        <div class="barbero">
-            <img src="img/trabajos/trabajo5.png" class="imagen-barbero" />
-        </div>
-      </section>
-    
-      <footer class="footer">
-        <div class="footer-contenedor">
+  <section id="galeria" class="equipo">
+    <h2>Galería de cortes</h2>
+    <div class="barbero">
+      <img src="img/trabajos/trabajo1.png" class="imagen-barbero" />
+    </div>
+    <div class="barbero">
+      <img src="img/trabajos/trabajo2.png" class="imagen-barbero" />
+    </div>
+    <div class="barbero">
+      <img src="img/trabajos/trabajo3.png" class="imagen-barbero" />
+    </div>
+    <div class="barbero">
+      <img src="img/trabajos/trabajo4.png" class="imagen-barbero" />
+    </div>
+    <div class="barbero">
+      <img src="img/trabajos/trabajo5.png" class="imagen-barbero" />
+    </div>
+  </section>
 
-          
-          <div class="footer-redes">
-            <h4>Redes Sociales</h4>
-            <a href="https://instagram.com/estiloclasicobarber" target="_blank">
-              <i class="fab fa-instagram"></i> @estiloclasicobarber
-            </a>
-            <a href="https://facebook.com/estiloclasicobarber" target="_blank">
-              <i class="fab fa-facebook-f"></i> Estilo Clásico Barber
-            </a>
-            <a href="https://twitter.com/estiloclasicobarber" target="_blank">
-              <i class="fab fa-x-twitter"></i> @estiloclasicobarber
-            </a>
-            <a href="https://tiktok.com/@estiloclasicobarber" target="_blank">
-              <i class="fab fa-tiktok"></i> @estiloclasicobarber
-            </a>
-            <a href="https://linkedin.com/company/estiloclasicobarber" target="_blank">
-              <i class="fab fa-linkedin-in"></i> Estilo Clásico Barber
-            </a>
-          </div>
+  <footer class="footer" id="contacto">
+    <div class="footer-contenedor">
 
-          
-          <div class="footer-contacto">
-            <h4>Contacto</h4>
-            <p><i class="fas fa-phone"></i> +598 91 234 567</p>
-            <p><i class="fas fa-envelope"></i> estiloclasicobarber@gmail.com</p>
-            <p><i class="fas fa-map-marker-alt"></i> <span id="direccion-footer">18 De Julio 1734</span></p>
-          </div>
 
-          
-          <div class="footer-mapa">
-            <h4>Cómo llegar</h4>
-            <iframe 
-              src="https://www.google.com/maps?q=direccion+montevideo&output=embed"
-              width="100%" height="200" style="border:0;" allowfullscreen=""
-              loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </div>
+      <div class="footer-redes">
+        <h4>Redes Sociales</h4>
+        <a href="https://instagram.com/estiloclasicobarber" target="_blank">
+          <i class="fab fa-instagram"></i> @estiloclasicobarber
+        </a>
+        <a href="https://facebook.com/estiloclasicobarber" target="_blank">
+          <i class="fab fa-facebook-f"></i> Estilo Clásico Barber
+        </a>
+        <a href="https://twitter.com/estiloclasicobarber" target="_blank">
+          <i class="fab fa-x-twitter"></i> @estiloclasicobarber
+        </a>
+        <a href="https://tiktok.com/@estiloclasicobarber" target="_blank">
+          <i class="fab fa-tiktok"></i> @estiloclasicobarber
+        </a>
+        <a href="https://linkedin.com/company/estiloclasicobarber" target="_blank">
+          <i class="fab fa-linkedin-in"></i> Estilo Clásico Barber
+        </a>
+      </div>
 
-        </div>
 
-        
-        <div class="footer-bottom">
-          <p>&copy; <span id="año-actual"></span> Estilo Clásico Barber. Todos los derechos reservados.</p>
-        </div>
-      </footer>
+      <div class="footer-contacto">
+        <h4>Contacto</h4>
+        <p><i class="fas fa-phone"></i> +598 91 234 567</p>
+        <p><i class="fas fa-envelope"></i> estiloclasicobarber@gmail.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> <span id="direccion-footer">18 De Julio 1734</span></p>
+      </div>
 
-      
+
+      <div class="footer-mapa">
+        <h4>Cómo llegar</h4>
+        <iframe src="https://www.google.com/maps?q=direccion+montevideo&output=embed" width="100%" height="200"
+          style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+      <p>&copy; <span id="año-actual"></span> Estilo Clásico Barber. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+
 
 
 </body>
 <script type="module" src="app.js"></script>
 <script>document.getElementById("año-actual").textContent = new Date().getFullYear();</script>
+
 </html>

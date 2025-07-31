@@ -9,6 +9,10 @@
   --color-warm-accent: #B38B6D;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Sección del equipo */
 #equipo-barberos {
   background: var(--color-bg-section);
@@ -28,7 +32,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1.5rem;
-  
+
 }
 
 /* Tarjeta */
@@ -112,6 +116,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   padding: 48px 0 0 0;
   background: none;
 }
@@ -182,34 +187,6 @@ footer h2 {
   margin-bottom: 8px;
 }
 
-@media (max-width: 600px) {
-  nav {
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px 8px;
-  }
-
-  section {
-    padding: 16px 6px;
-  }
-
-  header {
-    padding-top: 24px;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  .barberos-titulo {
-    font-size: 1.5rem;
-  }
-
-  .team-card__name {
-    font-size: 1.1rem;
-  }
-}
-
 .titulo-principal {
   text-align: center;
   margin-bottom: 40px;
@@ -228,32 +205,18 @@ footer h2 {
   gap: 30px;
 }
 
-/* Responsivo: 2 columnas para pantallas medianas */
-@media (max-width: 900px) {
-  .servicios-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Responsivo: 1 columna en pantallas pequeñas */
-@media (max-width: 600px) {
-  .servicios-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 .servicio-card {
   background-color: #2D2D2D;
   border: 2px solid #5E4B3B;
   border-radius: 10px;
   padding: 20px;
   transition: transform 0.2s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .servicio-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
 .servicio-titulo {
@@ -415,4 +378,248 @@ form select {
   margin-top: 15px;
   font-size: 14px;
   color: #cccccc;
+}
+
+#bookingList {
+  list-style-type: none;
+  padding: 0;
+  margin: 2rem 0;
+}
+
+#bookingList li {
+  background-color: var(--color-secondary);
+  border-left: 4px solid var(--color-warm-accent);
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#bookingList li:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.panel {
+  width: 1000px;
+}
+
+.booking-item {
+  background-color: var(--color-secondary);
+  border-left: 4px solid var(--color-warm-accent);
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.booking-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-tertiary);
+}
+
+.booking-client {
+  font-size: 1.2rem;
+  color: var(--color-text-primary);
+  margin: 0;
+  font-weight: 600;
+}
+
+.booking-date {
+  background-color: var(--color-tertiary);
+  color: var(--color-text-primary);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.booking-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking-service,
+.booking-barber,
+.booking-id {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}
+
+.booking-id {
+  color: var(--color-warm-accent);
+  font-weight: 500;
+}
+
+.booking-status {
+  padding: 0.2rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+
+/* Media Queries Unificadas */
+
+/* Hasta 600px (Mobile) */
+@media (max-width: 600px) {
+
+#loginForm {
+    padding: 18px 8px 14px 8px;
+    min-width: unset;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 8px;
+  }
+
+  #landing {
+    background-position: -350px;
+  }
+
+  .info-barbero h3,
+  .info-barbero p {
+    font-size: 11px;
+  }
+
+  .equipo {
+    grid-template-columns: 1fr;
+  }
+
+  section {
+    padding: 16px 6px;
+  }
+
+  header {
+    padding-top: 24px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .barberos-titulo {
+    font-size: 1.5rem;
+  }
+
+  .team-card__name {
+    font-size: 1.1rem;
+  }
+
+  .servicios-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .booking-date {
+    align-self: flex-start;
+  }
+
+  .booking-details {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-contenedor {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 601px - 768px (Tablets pequeñas) */
+@media (min-width: 601px) and (max-width: 768px) {
+
+  nav {
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px 8px;
+  }
+
+  #landing {
+    background-position: left;
+  }
+
+  .equipo {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .servicios-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-contenedor {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 769px - 900px (Tablets grandes) */
+@media (min-width: 769px) and (max-width: 900px) {
+  .equipo {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .servicios-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 901px - 1199px (Desktop pequeño) */
+@media (min-width: 901px) and (max-width: 1199px) {
+  .equipo {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .servicios-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-contenedor {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 1200px+ (Desktop grande) */
+@media (min-width: 1200px) {
+  section {
+    max-width: 1200px;
+  }
+
+  .panel {
+    width: 1000px;
+  }
+}
+
+/* Casos especiales para pantallas muy pequeñas */
+@media (max-width: 400px) {
+  nav a {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .booking-item {
+    padding: 1rem;
+  }
+
+  .cta-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
 }

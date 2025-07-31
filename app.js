@@ -77,7 +77,7 @@ if (document.getElementById('servicioSelect') && document.getElementById('barber
 
 const bookingForm = document.getElementById('bookingForm');
 if (bookingForm) {
-  bookingForm.addEventListener('submit', function(e) {
+  bookingForm.addEventListener('submit', function (e) {
     e.preventDefault();
     const fecha = document.getElementById('fecha').value;
     const hora = document.getElementById('hora').value;
@@ -111,7 +111,48 @@ if (bookingList) {
     }
     reservas.forEach((reserva, idx) => {
       const li = document.createElement('li');
-      li.textContent = `#${idx + 1} | Fecha: ${reserva.fecha}, Hora: ${reserva.hora}, Barbero: ${reserva.nombreBarbero}, Cliente: ${reserva.nombreCliente} (CI: ${reserva.ciCliente})`;
+      li.className = 'booking-item'; // Add class for styling
+
+      // Create header section
+      const headerDiv = document.createElement('div');
+      headerDiv.className = 'booking-header';
+
+      const clientName = document.createElement('h3');
+      clientName.className = 'booking-client';
+      clientName.textContent = reserva.nombreCliente;
+
+      const bookingDate = document.createElement('span');
+      bookingDate.className = 'booking-date';
+      bookingDate.textContent = `${reserva.fecha} - ${reserva.hora}`;
+
+      headerDiv.appendChild(clientName);
+      headerDiv.appendChild(bookingDate);
+
+      // Create details section
+      const detailsDiv = document.createElement('div');
+      detailsDiv.className = 'booking-details';
+
+      const serviceInfo = document.createElement('div');
+      serviceInfo.className = 'booking-service';
+      serviceInfo.textContent = `CI: ${reserva.ciCliente}`;
+
+      const barberInfo = document.createElement('div');
+      barberInfo.className = 'booking-barber';
+      barberInfo.textContent = `Barbero: ${reserva.nombreBarbero}`;
+
+      const bookingId = document.createElement('div');
+      bookingId.className = 'booking-id';
+      bookingId.textContent = `Reserva #${idx + 1}`;
+
+      detailsDiv.appendChild(serviceInfo);
+      detailsDiv.appendChild(barberInfo);
+      detailsDiv.appendChild(bookingId);
+
+      // Put it all together
+      li.appendChild(headerDiv);
+      li.appendChild(detailsDiv);
+
+      // Add to DOM
       bookingList.appendChild(li);
     });
   }
