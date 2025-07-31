@@ -34,8 +34,7 @@ if (goToBooking) {
   });
 }
 
-
-function loadSelects(barberos, servicios) {
+function loadSelects() {
   const servicioSelect = document.getElementById('servicioSelect');
   const barberoSelect = document.getElementById('barberoSelect');
   if (servicioSelect && servicios) {
@@ -68,6 +67,7 @@ function loadSelects(barberos, servicios) {
       barberoSelect.appendChild(option);
     });
   }
+  return barberoSelect.innerHTML;
 }
 
 if (document.getElementById('servicioSelect') && document.getElementById('barberoSelect')) {
