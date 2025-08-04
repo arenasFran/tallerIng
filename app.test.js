@@ -18,62 +18,25 @@ test('loadSelects carga correctamente barberos y servicios', () => {
   expect(barberoSelect.children[1].textContent).toBe('Joaquín Rojas - Especialista en fades');
 });
 
+test('loadSelects coloca placeholders correctamente', () => {
+  document.body.innerHTML = `
+    <select id="servicioSelect"></select>
+    <select id="barberoSelect"></select>
+  `;
 
-/* describe('Renderizado de reservas', () => {
-  beforeEach(() => {
-    document.body.innerHTML = `<ul id="bookingList"></ul>`;
-  });
+  loadSelects();
 
-  function renderBookings(reservas) {
-    const bookingList = document.getElementById('bookingList');
-    bookingList.innerHTML = '';
-    if (reservas.length === 0) {
-      bookingList.innerHTML = '<li>No hay reservas registradas.</li>';
-      return;
-    }
-    reservas.forEach((reserva, idx) => {
-      const li = document.createElement('li');
-      li.className = 'booking-item';
+  const servicioSelect = document.getElementById('servicioSelect');
+  const barberoSelect = document.getElementById('barberoSelect');
 
-      const headerDiv = document.createElement('div');
-      headerDiv.className = 'booking-header';
+  expect(servicioSelect.firstChild.textContent).toBe('Selecciona un servicio');
+  expect(servicioSelect.firstChild.disabled).toBe(true);
+  expect(servicioSelect.firstChild.selected).toBe(true);
 
-      const clientName = document.createElement('h3');
-      clientName.className = 'booking-client';
-      clientName.textContent = reserva.nombreCliente;
-
-      const bookingDate = document.createElement('span');
-      bookingDate.className = 'booking-date';
-      bookingDate.textContent = `${reserva.fecha} - ${reserva.hora}`;
-
-      headerDiv.appendChild(clientName);
-      headerDiv.appendChild(bookingDate);
-
-      const detailsDiv = document.createElement('div');
-      detailsDiv.className = 'booking-details';
-
-      const serviceInfo = document.createElement('div');
-      serviceInfo.className = 'booking-service';
-      serviceInfo.textContent = `CI: ${reserva.ciCliente}`;
-
-      const barberInfo = document.createElement('div');
-      barberInfo.className = 'booking-barber';
-      barberInfo.textContent = `Barbero: ${reserva.nombreBarbero}`;
-
-      const bookingId = document.createElement('div');
-      bookingId.className = 'booking-id';
-      bookingId.textContent = `Reserva #${idx + 1}`;
-
-      detailsDiv.appendChild(serviceInfo);
-      detailsDiv.appendChild(barberInfo);
-      detailsDiv.appendChild(bookingId);
-
-      li.appendChild(headerDiv);
-      li.appendChild(detailsDiv);
-
-      bookingList.appendChild(li);
-    });
-  } */
+  expect(barberoSelect.firstChild.textContent).toBe('Selecciona un barbero');
+  expect(barberoSelect.firstChild.disabled).toBe(true);
+  expect(barberoSelect.firstChild.selected).toBe(true);
+});
 
 test('muestra mensaje si no hay reservas', () => {
   document.body.innerHTML = `
@@ -205,4 +168,99 @@ describe('Función reserva()', () => {
     expect(storedReservas[1].nombreCliente).toBe('Juan');
   });
 
+  test('no crea reserva si falta el nombre del cliente', () => {
+    document.body.innerHTML = `
+      <form id="bookingForm">
+        <input id="fecha" value="2025-08-10">
+        <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
+        <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
+        <input id="ciCliente" value="12345678">
+        <input id="nombreCliente" value="">
+        <select id="servicioSelect"><option value="Corte" selected>Corte</option></select>
+        <div id="bookingFeedback"></div>
+      </form>
+    `;
+    
+    const reservas = [];
+    const resultado = reserva(reservas);
+
+    expect(resultado).toBe(false);
+    expect(reservas).toHaveLength(0);
+    expect(document.getElementById('bookingFeedback').textContent).toBe('Por favor complete todos los campos obligatorios');
+  });
+
+  test('resetea el formulario luego de hacer una reserva', () => {
+    document.body.innerHTML = `
+      <form id="bookingForm">
+        <input id="fecha" value="2025-08-10">
+        <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
+        <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
+        <input id="ciCliente" value="12345678">
+        <input id="nombreCliente" value="Fran">
+        <select id="servicioSelect"><option value="Corte" selected>Corte</option></select>
+        <div id="bookingFeedback"></div>
+      </form>
+    `;
+
+    const reservas = [];
+    const form = document.getElementById('bookingForm');
+    
+    let resetCalled = false;
+    form.reset = () => { resetCalled = true; };
+
+    reserva(reservas);
+
+    expect(resetCalled).toBe(true);
+  });
+
+  test('renderiza la reserva luego de crearla', () => {
+    document.body.innerHTML = `
+      <ul id="bookingList"></ul>
+    `;
+
+    const reservas = [
+      new Reserva("2025-08-10", "15:00", "Corte", "Joaquín Rojas", "12345678", "Fran")
+    ];
+
+    renderBookings(reservas);
+
+    const li = document.querySelector('.booking-item');
+    expect(li).not.toBeNull();
+    expect(li.querySelector('.booking-client').textContent).toBe("Fran");
+  });
+
+  test('reserva se ejecuta correctamente con evento submit', () => {
+    document.body.innerHTML = `
+      <form id="bookingForm">
+        <input id="fecha" value="2025-08-10">
+        <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
+        <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
+        <input id="ciCliente" value="12345678">
+        <input id="nombreCliente" value="Fran">
+        <select id="servicioSelect"><option value="Corte" selected>Corte</option></select>
+        <div id="bookingFeedback"></div>
+      </form>
+    `;
+
+    const reservas = [];
+    const form = document.getElementById('bookingForm');
+
+    let preventDefaultCalled = false;
+
+    form.addEventListener('submit', (e) => {
+      if (typeof e.preventDefault === 'function') {
+        preventDefaultCalled = true;
+        e.preventDefault();
+      }
+      reserva(reservas);
+    });
+
+    const event = new Event('submit', { bubbles: true, cancelable: true });
+    form.dispatchEvent(event);
+
+    expect(preventDefaultCalled).toBe(true);
+    expect(reservas).toHaveLength(1);
+  });
+
 });
+
