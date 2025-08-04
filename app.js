@@ -111,7 +111,7 @@ if (bookingList) {
       const li = document.createElement('li');
       li.className = 'booking-item'; // Add class for styling
 
-      // Create header section
+      
       const headerDiv = document.createElement('div');
       headerDiv.className = 'booking-header';
 
@@ -126,7 +126,7 @@ if (bookingList) {
       headerDiv.appendChild(clientName);
       headerDiv.appendChild(bookingDate);
 
-      // Create details section
+      
       const detailsDiv = document.createElement('div');
       detailsDiv.className = 'booking-details';
 
@@ -146,11 +146,9 @@ if (bookingList) {
       detailsDiv.appendChild(barberInfo);
       detailsDiv.appendChild(bookingId);
 
-      // Put it all together
+      
       li.appendChild(headerDiv);
       li.appendChild(detailsDiv);
-
-      // Add to DOM
       bookingList.appendChild(li);
     });
   }
