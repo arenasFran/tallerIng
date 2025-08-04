@@ -76,7 +76,6 @@ bookingForm.addEventListener("submit", (e) => {
   const servicio = document.getElementById("servicioSelect").value;
 
   if (!fecha || !hora || !nombreBarbero || !ciCliente || !nombreCliente || !servicio) {
-    alert("Por favor, completa todos los campos.");
     return;
   }
 

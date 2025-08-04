@@ -78,13 +78,13 @@ if (bookingForm) {
   bookingForm.addEventListener('submit', function (e) {
     e.preventDefault();
     const fecha = document.getElementById('fecha').value;
-    const hora = document.getElementById('hora').value;
+    const hora = document.getElementById('horaSelect').value;
     const nombreBarbero = barberoSelect ? barberoSelect.value : '';
     const ciCliente = document.getElementById('ciCliente').value;
     const nombreCliente = document.getElementById('nombreCliente').value;
     const servicioElegido = servicioSelect ? servicioSelect.value : '';
-    const nuevaReserva = new Reserva(fecha, hora, nombreBarbero, ciCliente, nombreCliente);
-    nuevaReserva.servicio = servicioElegido;
+    const nuevaReserva = new Reserva(fecha, hora, servicioElegido, nombreBarbero,ciCliente, nombreCliente);
+    console.log(nuevaReserva);
     reservas.push(nuevaReserva);
     localStorage.setItem('reservas', JSON.stringify(reservas));
     const feedback = document.getElementById('bookingFeedback');
@@ -109,7 +109,7 @@ if (bookingList) {
     }
     reservas.forEach((reserva, idx) => {
       const li = document.createElement('li');
-      li.className = 'booking-item'; // Add class for styling
+      li.className = 'booking-item'; 
 
       
       const headerDiv = document.createElement('div');
@@ -137,6 +137,7 @@ if (bookingList) {
       const barberInfo = document.createElement('div');
       barberInfo.className = 'booking-barber';
       barberInfo.textContent = `Barbero: ${reserva.nombreBarbero}`;
+      console.log(reserva.nombreBarbero)
 
       const bookingId = document.createElement('div');
       bookingId.className = 'booking-id';
