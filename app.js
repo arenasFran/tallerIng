@@ -2,6 +2,7 @@ import Reserva from "./classes/reserva.js";
 import Barbero from "./classes/barbero.js";
 import Servicio from "./classes/servicios.js";
 
+
 const saved = localStorage.getItem('reservas');
 const reservas = saved ? JSON.parse(saved) : [];
 
@@ -13,7 +14,6 @@ const servicios = [
   new Servicio('Lavado', 200),
   new Servicio('Colorimetría', 800)
 ];
-
 
 const barberos = [
   new Barbero('Joaquín', 'Rojas', 'Especialista en fades'),
@@ -35,7 +35,8 @@ if (goToBooking) {
 function loadSelects() {
   const servicioSelect = document.getElementById('servicioSelect');
   const barberoSelect = document.getElementById('barberoSelect');
-  if (servicioSelect && servicios) {
+
+  if (servicioSelect) {
     servicioSelect.innerHTML = '';
     const placeholder = document.createElement('option');
     placeholder.value = '';
@@ -43,6 +44,7 @@ function loadSelects() {
     placeholder.disabled = true;
     placeholder.selected = true;
     servicioSelect.appendChild(placeholder);
+
     servicios.forEach(servicio => {
       const option = document.createElement('option');
       option.value = servicio.nombreServicio;
@@ -50,7 +52,8 @@ function loadSelects() {
       servicioSelect.appendChild(option);
     });
   }
-  if (barberoSelect && barberos) {
+
+  if (barberoSelect) {
     barberoSelect.innerHTML = '';
     const placeholder = document.createElement('option');
     placeholder.value = '';
@@ -58,6 +61,7 @@ function loadSelects() {
     placeholder.disabled = true;
     placeholder.selected = true;
     barberoSelect.appendChild(placeholder);
+
     barberos.forEach(barbero => {
       const option = document.createElement('option');
       option.value = `${barbero.nombre} ${barbero.apellido}`;
@@ -65,28 +69,34 @@ function loadSelects() {
       barberoSelect.appendChild(option);
     });
   }
-  return barberoSelect.innerHTML;
 }
 
 if (document.getElementById('servicioSelect') && document.getElementById('barberoSelect')) {
-  loadSelects(barberos, servicios);
+  loadSelects();
 }
 
 
 const bookingForm = document.getElementById('bookingForm');
 if (bookingForm) {
-  bookingForm.addEventListener('submit', reserva(reservas));
+  bookingForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    reserva(reservas);
+  });
 }
+
 
 function reserva(reservas) {
   const bookingForm = document.getElementById('bookingForm');
-  const fecha = document.getElementById('fecha').value;
-  const hora = document.getElementById('horaSelect').value;
+  const fecha = document.getElementById('fecha')?.value;
+  const hora = document.getElementById('horaSelect')?.value;
+  const barberoSelect = document.getElementById('barberoSelect');
   const nombreBarbero = barberoSelect ? barberoSelect.value : '';
-  const ciCliente = document.getElementById('ciCliente').value;
-  const nombreCliente = document.getElementById('nombreCliente').value;
+  const ciCliente = document.getElementById('ciCliente')?.value;
+  const nombreCliente = document.getElementById('nombreCliente')?.value;
+  const servicioSelect = document.getElementById('servicioSelect');
   const servicioElegido = servicioSelect ? servicioSelect.value : '';
   const feedback = document.getElementById('bookingFeedback');
+
   if (!fecha || !hora || !nombreBarbero || !ciCliente || !nombreCliente || !servicioElegido) {
     feedback.textContent = 'Por favor complete todos los campos obligatorios';
     feedback.classList.add('show-feedback', 'error-feedback');
@@ -94,20 +104,23 @@ function reserva(reservas) {
       feedback.textContent = '';
       feedback.classList.remove('show-feedback', 'error-feedback');
     }, 3000);
-    return false; // No continuar si faltan campos
+    return false;
   }
+
   const nuevaReserva = new Reserva(fecha, hora, servicioElegido, nombreBarbero, ciCliente, nombreCliente);
-  console.log(nuevaReserva);
   reservas.push(nuevaReserva);
   localStorage.setItem('reservas', JSON.stringify(reservas));
+
   feedback.textContent = '¡Reserva realizada con éxito!';
-  console.log(reservas)
   feedback.classList.add('show-feedback');
   setTimeout(() => {
     feedback.textContent = '';
     feedback.classList.remove('show-feedback');
   }, 3000);
+
   bookingForm.reset();
+  renderBookings(reservas);
+  return true;
 }
 
 const bookingList = document.getElementById('bookingList');
@@ -115,17 +128,21 @@ if (bookingList) {
   renderBookings(reservas);
 }
 
+
 function renderBookings(reservas) {
   const bookingList = document.getElementById('bookingList');
+  if (!bookingList) return; 
+
   bookingList.innerHTML = '';
+
   if (reservas.length === 0) {
     bookingList.innerHTML = '<li>No hay reservas registradas.</li>';
     return;
   }
+
   reservas.forEach((reserva, idx) => {
     const li = document.createElement('li');
     li.className = 'booking-item';
-
 
     const headerDiv = document.createElement('div');
     headerDiv.className = 'booking-header';
@@ -141,7 +158,6 @@ function renderBookings(reservas) {
     headerDiv.appendChild(clientName);
     headerDiv.appendChild(bookingDate);
 
-
     const detailsDiv = document.createElement('div');
     detailsDiv.className = 'booking-details';
 
@@ -152,7 +168,6 @@ function renderBookings(reservas) {
     const barberInfo = document.createElement('div');
     barberInfo.className = 'booking-barber';
     barberInfo.textContent = `Barbero: ${reserva.nombreBarbero}`;
-    console.log(reserva.nombreBarbero)
 
     const bookingId = document.createElement('div');
     bookingId.className = 'booking-id';
@@ -161,7 +176,6 @@ function renderBookings(reservas) {
     detailsDiv.appendChild(serviceInfo);
     detailsDiv.appendChild(barberInfo);
     detailsDiv.appendChild(bookingId);
-
 
     li.appendChild(headerDiv);
     li.appendChild(detailsDiv);
