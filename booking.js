@@ -71,7 +71,8 @@ bookingForm.addEventListener("submit", (e) => {
   const fecha = fechaInput.value;
   const hora = horaSelect.value;
   const nombreBarbero = document.getElementById("barberoSelect").value;
-  const ciCliente = document.getElementById("ciCliente").value.trim();
+  const celCliente = document.getElementById("celCliente").value.trim();
+  const mailCliente = document.getElementById("mailCliente").value.trim();
   const nombreCliente = document.getElementById("nombreCliente").value.trim();
   const servicio = document.getElementById("servicioSelect").value;
 
@@ -89,7 +90,8 @@ bookingForm.addEventListener("submit", (e) => {
   }
 
 
-  const nuevaReserva = new Reserva(fecha, hora, nombreBarbero, ciCliente, nombreCliente, servicio);
+  const nuevaReserva = new Reserva(fecha, hora,servicio, nombreBarbero, celCliente,mailCliente, nombreCliente);
+  console.log("Nueva reserva:", nuevaReserva);
   reservas.push(nuevaReserva);
 
 

@@ -91,13 +91,15 @@ function reserva(reservas) {
   const hora = document.getElementById('horaSelect')?.value;
   const barberoSelect = document.getElementById('barberoSelect');
   const nombreBarbero = barberoSelect ? barberoSelect.value : '';
-  const ciCliente = document.getElementById('ciCliente')?.value;
+  const telefonoCliente = document.getElementById('celCliente')?.value;
+  const emailCliente = document.getElementById('mailCliente')?.value;
   const nombreCliente = document.getElementById('nombreCliente')?.value;
   const servicioSelect = document.getElementById('servicioSelect');
   const servicioElegido = servicioSelect ? servicioSelect.value : '';
   const feedback = document.getElementById('bookingFeedback');
 
-  if (!fecha || !hora || !nombreBarbero || !ciCliente || !nombreCliente || !servicioElegido) {
+ if (!fecha || !hora || !nombreBarbero || !telefonoCliente || !emailCliente || !nombreCliente || !servicioElegido) {
+
     feedback.textContent = 'Por favor complete todos los campos obligatorios';
     feedback.classList.add('show-feedback', 'error-feedback');
     setTimeout(() => {
@@ -107,7 +109,7 @@ function reserva(reservas) {
     return false;
   }
 
-  const nuevaReserva = new Reserva(fecha, hora, servicioElegido, nombreBarbero, ciCliente, nombreCliente);
+  const nuevaReserva = new Reserva(fecha, hora, servicioElegido, nombreBarbero, telefonoCliente, emailCliente, nombreCliente);
   reservas.push(nuevaReserva);
   localStorage.setItem('reservas', JSON.stringify(reservas));
 
@@ -131,7 +133,7 @@ if (bookingList) {
 
 function renderBookings(reservas) {
   const bookingList = document.getElementById('bookingList');
-  if (!bookingList) return; 
+  if (!bookingList) return;
 
   bookingList.innerHTML = '';
 
@@ -140,9 +142,16 @@ function renderBookings(reservas) {
     return;
   }
 
-  reservas.forEach((reserva, idx) => {
-    const li = document.createElement('li');
-    li.className = 'booking-item';
+   reservas
+    .slice() 
+    .sort((a, b) => {
+      const dateA = new Date(`${a.fecha}T${a.hora}`);
+      const dateB = new Date(`${b.fecha}T${b.hora}`);
+      return dateA - dateB;
+    })
+    .forEach((reserva, idx) => {
+      const li = document.createElement('li');
+      li.className = 'booking-item';
 
     const headerDiv = document.createElement('div');
     headerDiv.className = 'booking-header';
@@ -161,9 +170,13 @@ function renderBookings(reservas) {
     const detailsDiv = document.createElement('div');
     detailsDiv.className = 'booking-details';
 
-    const serviceInfo = document.createElement('div');
-    serviceInfo.className = 'booking-service';
-    serviceInfo.textContent = `CI: ${reserva.ciCliente}`;
+    const phoneInfo = document.createElement('div');
+    phoneInfo.className = 'booking-phone';
+    phoneInfo.textContent = `Celular: ${reserva.celularCliente}`;
+
+    const emailInfo = document.createElement('div');
+    emailInfo.className = 'booking-email';
+    emailInfo.textContent = `Email: ${reserva.mailCliente}`;
 
     const barberInfo = document.createElement('div');
     barberInfo.className = 'booking-barber';
@@ -173,7 +186,8 @@ function renderBookings(reservas) {
     bookingId.className = 'booking-id';
     bookingId.textContent = `Reserva #${idx + 1}`;
 
-    detailsDiv.appendChild(serviceInfo);
+    detailsDiv.appendChild(phoneInfo);
+    detailsDiv.appendChild(emailInfo);
     detailsDiv.appendChild(barberInfo);
     detailsDiv.appendChild(bookingId);
 

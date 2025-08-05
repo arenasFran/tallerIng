@@ -1,10 +1,11 @@
 class Reserva {
-  constructor(fecha, hora, servicio, nombreBarbero, ciCliente, nombreCliente) {
+  constructor(fecha, hora, servicio, nombreBarbero, celularCliente,mailCliente, nombreCliente) {
     this.fecha = fecha;
     this.hora = hora;
     this.servicio = servicio;
     this.nombreBarbero = nombreBarbero;
-    this.ciCliente = ciCliente;
+    this.celularCliente = celularCliente;
+    this.mailCliente = mailCliente;
     this.nombreCliente = nombreCliente;
   }
 }
