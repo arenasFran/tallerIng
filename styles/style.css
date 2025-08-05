@@ -13,13 +13,11 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Sección del equipo */
 #equipo-barberos {
   background: var(--color-bg-section);
   padding: 2rem;
 }
 
-/* Título */
 .barberos-titulo {
   color: var(--color-text-primary);
   text-align: center;
@@ -27,7 +25,6 @@ html {
   margin-bottom: 1.5rem;
 }
 
-/* Grid responsive */
 .equipo {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -35,7 +32,6 @@ html {
 
 }
 
-/* Tarjeta */
 .barbero {
   background: var(--color-secondary);
   border: 2px solid var(--color-tertiary);
@@ -50,7 +46,6 @@ html {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9);
 }
 
-/* Imagen con efecto zoom ligero */
 .imagen-barbero {
   display: block;
   width: 100%;
@@ -59,7 +54,6 @@ html {
   transition: transform 0.3s ease;
 }
 
-/* Info */
 .info-barbero {
   padding: 1rem;
 }
@@ -76,7 +70,6 @@ html {
   font-size: 1rem;
 }
 
-/* Lightbox */
 #lightbox {
   position: fixed;
   top: 0;
@@ -378,6 +371,33 @@ form select {
   margin-top: 15px;
   font-size: 14px;
   color: #cccccc;
+  padding: 10px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#bookingFeedback.show-feedback {
+  opacity: 1;
+}
+
+#bookingFeedback.error-feedback {
+  background-color: rgba(220, 53, 69, 0.2);
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+}
+
+#bookingFeedback:not(.error-feedback) {
+  background-color: rgba(40, 167, 69, 0.2);
+  color: #51cf66;
+  border: 1px solid #51cf66;
+}
+
+.form-helper-text {
+  color: #B38B6D;
+  font-size: 0.9em;
+  display: block;
+  margin-top: 5px;
 }
 
 #bookingList {
@@ -471,9 +491,7 @@ form select {
 }
 
 
-/* Media Queries Unificadas */
 
-/* Hasta 600px (Mobile) */
 @media (max-width: 600px) {
 
 #loginForm {
@@ -544,7 +562,7 @@ form select {
   }
 }
 
-/* 601px - 768px (Tablets pequeñas) */
+
 @media (min-width: 601px) and (max-width: 768px) {
 
   nav {
@@ -570,7 +588,7 @@ form select {
   }
 }
 
-/* 769px - 900px (Tablets grandes) */
+
 @media (min-width: 769px) and (max-width: 900px) {
   .equipo {
     grid-template-columns: repeat(3, 1fr);
@@ -581,7 +599,7 @@ form select {
   }
 }
 
-/* 901px - 1199px (Desktop pequeño) */
+
 @media (min-width: 901px) and (max-width: 1199px) {
   .equipo {
     grid-template-columns: repeat(3, 1fr);
@@ -596,7 +614,6 @@ form select {
   }
 }
 
-/* 1200px+ (Desktop grande) */
 @media (min-width: 1200px) {
   section {
     max-width: 1200px;
@@ -607,7 +624,7 @@ form select {
   }
 }
 
-/* Casos especiales para pantallas muy pequeñas */
+
 @media (max-width: 400px) {
   nav a {
     padding: 6px 10px;

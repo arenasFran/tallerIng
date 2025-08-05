@@ -13,9 +13,22 @@ const bookingForm = document.getElementById("bookingForm");
 const feedback = document.getElementById("bookingFeedback");
 
 
+function setMinDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const todayString = `${year}-${month}-${day}`;
+  
+  fechaInput.min = todayString;
+}
+
+setMinDate();
+
+
 function generarHorarios() {
   const horarios = [];
-  for (let h = 9; h <= 21; h++) {
+  for (let h = 9; h <= 20; h++) {
     horarios.push(`${h.toString().padStart(2, "0")}:00`);
     horarios.push(`${h.toString().padStart(2, "0")}:30`);
   }
@@ -36,7 +49,6 @@ function actualizarHoras(fecha) {
 
   const horarios = generarHorarios();
 
-
   const horasReservadas = reservas
     .filter((r) => r.fecha === fecha)
     .map((r) => r.hora);
@@ -47,14 +59,35 @@ function actualizarHoras(fecha) {
   opcionVacia.textContent = "Seleccione una hora";
   horaSelect.appendChild(opcionVacia);
 
+
   horarios.forEach((hora) => {
     const opcion = document.createElement("option");
     opcion.value = hora;
     opcion.textContent = hora;
+    
+  
     if (horasReservadas.includes(hora)) {
       opcion.disabled = true;
       opcion.textContent += " (Reservado)";
+      opcion.style.color = "#999";
     }
+    
+
+    const today = new Date();
+    const selectedDate = new Date(fecha);
+    if (selectedDate.toDateString() === today.toDateString()) {
+      const [horaHora, horaMinuto] = hora.split(':').map(Number);
+      const now = new Date();
+      const currentHour = now.getHours();
+      const currentMinute = now.getMinutes();
+      
+      if (horaHora < currentHour || (horaHora === currentHour && horaMinuto <= currentMinute)) {
+        opcion.disabled = true;
+        opcion.textContent += " (Hora pasada)";
+        opcion.style.color = "#999";
+      }
+    }
+    
     horaSelect.appendChild(opcion);
   });
 }
@@ -76,8 +109,47 @@ bookingForm.addEventListener("submit", (e) => {
   const nombreCliente = document.getElementById("nombreCliente").value.trim();
   const servicio = document.getElementById("servicioSelect").value;
 
-  if (!fecha || !hora || !nombreBarbero || !ciCliente || !nombreCliente || !servicio) {
+  if (!fecha || !hora || !nombreBarbero || !celCliente || !mailCliente || !nombreCliente || !servicio) {
+    feedback.textContent = 'Por favor complete todos los campos obligatorios';
+    feedback.classList.add('show-feedback', 'error-feedback');
+    setTimeout(() => {
+      feedback.textContent = '';
+      feedback.classList.remove('show-feedback', 'error-feedback');
+    }, 3000);
     return;
+  }
+
+ 
+  const selectedDate = new Date(fecha);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); 
+  
+  if (selectedDate < today) {
+    feedback.textContent = 'No se pueden hacer reservas para fechas pasadas';
+    feedback.classList.add('show-feedback', 'error-feedback');
+    setTimeout(() => {
+      feedback.textContent = '';
+      feedback.classList.remove('show-feedback', 'error-feedback');
+    }, 3000);
+    return;
+  }
+
+  
+  if (selectedDate.getTime() === today.getTime()) {
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const [selectedHour, selectedMinute] = hora.split(':').map(Number);
+    
+    if (selectedHour < currentHour || (selectedHour === currentHour && selectedMinute <= currentMinute)) {
+      feedback.textContent = 'No se pueden hacer reservas para horas pasadas';
+      feedback.classList.add('show-feedback', 'error-feedback');
+      setTimeout(() => {
+        feedback.textContent = '';
+        feedback.classList.remove('show-feedback', 'error-feedback');
+      }, 3000);
+      return;
+    }
   }
 
 
@@ -85,7 +157,12 @@ bookingForm.addEventListener("submit", (e) => {
     (r) => r.fecha === fecha && r.hora === hora
   );
   if (yaReservado) {
-    alert("Esa hora ya está reservada, por favor elige otra.");
+    feedback.textContent = 'Esa hora ya está reservada, por favor elige otra.';
+    feedback.classList.add('show-feedback', 'error-feedback');
+    setTimeout(() => {
+      feedback.textContent = '';
+      feedback.classList.remove('show-feedback', 'error-feedback');
+    }, 3000);
     return;
   }
 
@@ -107,7 +184,25 @@ bookingForm.addEventListener("submit", (e) => {
 
  
   bookingForm.reset();
+  
+ 
   actualizarHoras(fecha);
+  
+  
+  fechaInput.value = "";
+  horaSelect.disabled = true;
+  horaSelect.innerHTML = `<option value="">Seleccione una fecha primero</option>`;
+  
+
+  const bookingList = document.getElementById('bookingList');
+  if (bookingList) {
+  
+    import('./app.js').then(module => {
+      module.renderBookings(reservas);
+    }).catch(err => {
+      console.log('No se pudo actualizar la lista de reservas:', err);
+    });
+  }
 });
 
 

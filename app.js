@@ -76,54 +76,7 @@ if (document.getElementById('servicioSelect') && document.getElementById('barber
 }
 
 
-const bookingForm = document.getElementById('bookingForm');
-if (bookingForm) {
-  bookingForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    reserva(reservas);
-  });
-}
 
-
-function reserva(reservas) {
-  const bookingForm = document.getElementById('bookingForm');
-  const fecha = document.getElementById('fecha')?.value;
-  const hora = document.getElementById('horaSelect')?.value;
-  const barberoSelect = document.getElementById('barberoSelect');
-  const nombreBarbero = barberoSelect ? barberoSelect.value : '';
-  const telefonoCliente = document.getElementById('celCliente')?.value;
-  const emailCliente = document.getElementById('mailCliente')?.value;
-  const nombreCliente = document.getElementById('nombreCliente')?.value;
-  const servicioSelect = document.getElementById('servicioSelect');
-  const servicioElegido = servicioSelect ? servicioSelect.value : '';
-  const feedback = document.getElementById('bookingFeedback');
-
- if (!fecha || !hora || !nombreBarbero || !telefonoCliente || !emailCliente || !nombreCliente || !servicioElegido) {
-
-    feedback.textContent = 'Por favor complete todos los campos obligatorios';
-    feedback.classList.add('show-feedback', 'error-feedback');
-    setTimeout(() => {
-      feedback.textContent = '';
-      feedback.classList.remove('show-feedback', 'error-feedback');
-    }, 3000);
-    return false;
-  }
-
-  const nuevaReserva = new Reserva(fecha, hora, servicioElegido, nombreBarbero, telefonoCliente, emailCliente, nombreCliente);
-  reservas.push(nuevaReserva);
-  localStorage.setItem('reservas', JSON.stringify(reservas));
-
-  feedback.textContent = '¡Reserva realizada con éxito!';
-  feedback.classList.add('show-feedback');
-  setTimeout(() => {
-    feedback.textContent = '';
-    feedback.classList.remove('show-feedback');
-  }, 3000);
-
-  bookingForm.reset();
-  renderBookings(reservas);
-  return true;
-}
 
 const bookingList = document.getElementById('bookingList');
 if (bookingList) {
@@ -198,4 +151,4 @@ function renderBookings(reservas) {
 }
 
 
-export { Reserva, Servicio, Barbero, loadSelects, renderBookings, reserva };
+export { Reserva, Servicio, Barbero, loadSelects, renderBookings };

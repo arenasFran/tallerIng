@@ -26,12 +26,18 @@
         <select id="barberoSelect" required></select>
 
         <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha" required />
+        <input type="date" id="fecha" required min="" />
+        <small class="form-helper-text">
+          Solo se pueden hacer reservas para fechas futuras
+        </small>
 
         <label for="horaSelect">Hora:</label>
         <select id="horaSelect" required>
           <option value="">Seleccione una fecha primero</option>
         </select>
+        <small class="form-helper-text">
+          Horarios disponibles: 9:00 - 20:30 (cada 30 minutos)
+        </small>
 
         <label for="celCliente">Celular:</label>
         <input type="text" id="celCliente" placeholder="Celular" required />
