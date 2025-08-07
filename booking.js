@@ -1,5 +1,11 @@
 import Reserva from "./classes/reserva.js";
 
+document
+  .getElementById("barberoSelect")
+  .addEventListener("change", () => {
+    actualizarHoras(fechaInput.value);
+  });
+
 let reservas = [];
 const reservasGuardadas = localStorage.getItem("reservas");
 if (reservasGuardadas) {
@@ -19,7 +25,7 @@ function setMinDate() {
   const month = String(today.getMonth() + 1).padStart(2, '0');
   const day = String(today.getDate()).padStart(2, '0');
   const todayString = `${year}-${month}-${day}`;
-  
+
   fechaInput.min = todayString;
 }
 
@@ -47,10 +53,12 @@ function actualizarHoras(fecha) {
 
   horaSelect.disabled = false;
 
+  const nombreBarbero = document.getElementById("barberoSelect").value;
+
   const horarios = generarHorarios();
 
   const horasReservadas = reservas
-    .filter((r) => r.fecha === fecha)
+    .filter((r) => r.fecha === fecha && r.nombreBarbero === nombreBarbero)
     .map((r) => r.hora);
 
 
@@ -64,14 +72,14 @@ function actualizarHoras(fecha) {
     const opcion = document.createElement("option");
     opcion.value = hora;
     opcion.textContent = hora;
-    
-  
+
+
     if (horasReservadas.includes(hora)) {
       opcion.disabled = true;
       opcion.textContent += " (Reservado)";
       opcion.style.color = "#999";
     }
-    
+
 
     const today = new Date();
     const selectedDate = new Date(fecha);
@@ -80,14 +88,14 @@ function actualizarHoras(fecha) {
       const now = new Date();
       const currentHour = now.getHours();
       const currentMinute = now.getMinutes();
-      
+
       if (horaHora < currentHour || (horaHora === currentHour && horaMinuto <= currentMinute)) {
         opcion.disabled = true;
         opcion.textContent += " (Hora pasada)";
         opcion.style.color = "#999";
       }
     }
-    
+
     horaSelect.appendChild(opcion);
   });
 }
@@ -119,11 +127,11 @@ bookingForm.addEventListener("submit", (e) => {
     return;
   }
 
- 
+
   const selectedDate = new Date(fecha);
   const today = new Date();
-  today.setHours(0, 0, 0, 0); 
-  
+  today.setHours(0, 0, 0, 0);
+
   if (selectedDate < today) {
     feedback.textContent = 'No se pueden hacer reservas para fechas pasadas';
     feedback.classList.add('show-feedback', 'error-feedback');
@@ -134,13 +142,13 @@ bookingForm.addEventListener("submit", (e) => {
     return;
   }
 
-  
+
   if (selectedDate.getTime() === today.getTime()) {
     const now = new Date();
     const currentHour = now.getHours();
     const currentMinute = now.getMinutes();
     const [selectedHour, selectedMinute] = hora.split(':').map(Number);
-    
+
     if (selectedHour < currentHour || (selectedHour === currentHour && selectedMinute <= currentMinute)) {
       feedback.textContent = 'No se pueden hacer reservas para horas pasadas';
       feedback.classList.add('show-feedback', 'error-feedback');
@@ -154,7 +162,7 @@ bookingForm.addEventListener("submit", (e) => {
 
 
   const yaReservado = reservas.some(
-    (r) => r.fecha === fecha && r.hora === hora
+    (r) => r.fecha === fecha && r.hora === hora && r.nombreBarbero === nombreBarbero
   );
   if (yaReservado) {
     feedback.textContent = 'Esa hora ya está reservada, por favor elige otra.';
@@ -167,7 +175,7 @@ bookingForm.addEventListener("submit", (e) => {
   }
 
 
-  const nuevaReserva = new Reserva(fecha, hora,servicio, nombreBarbero, celCliente,mailCliente, nombreCliente);
+  const nuevaReserva = new Reserva(fecha, hora, servicio, nombreBarbero, celCliente, mailCliente, nombreCliente);
   console.log("Nueva reserva:", nuevaReserva);
   reservas.push(nuevaReserva);
 
@@ -182,21 +190,21 @@ bookingForm.addEventListener("submit", (e) => {
     feedback.classList.remove("show-feedback");
   }, 3000);
 
- 
+
   bookingForm.reset();
-  
- 
+
+
   actualizarHoras(fecha);
-  
-  
+
+
   fechaInput.value = "";
   horaSelect.disabled = true;
   horaSelect.innerHTML = `<option value="">Seleccione una fecha primero</option>`;
-  
+
 
   const bookingList = document.getElementById('bookingList');
   if (bookingList) {
-  
+
     import('./app.js').then(module => {
       module.renderBookings(reservas);
     }).catch(err => {
