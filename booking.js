@@ -174,8 +174,15 @@ bookingForm.addEventListener("submit", (e) => {
     return;
   }
 
-
-  const nuevaReserva = new Reserva(fecha, hora, servicio, nombreBarbero, celCliente, mailCliente, nombreCliente);
+  const nuevaReserva = new Reserva(
+    fecha,
+    hora,
+    servicio,
+    nombreBarbero,
+    celCliente,  
+    mailCliente,
+    nombreCliente
+  );
   console.log("Nueva reserva:", nuevaReserva);
   reservas.push(nuevaReserva);
 

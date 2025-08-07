@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1754575923447" clover="3.2.0">
+  <project timestamp="1754575923447" name="All files">
+    <metrics statements="113" coveredstatements="109" conditionals="27" coveredconditionals="19" methods="11" coveredmethods="10" elements="151" coveredelements="138" complexity="0" loc="113" ncloc="113" packages="2" files="4" classes="4"/>
+    <package name="tallerIng">
+      <metrics statements="101" coveredstatements="97" conditionals="27" coveredconditionals="19" methods="8" coveredmethods="7"/>
+      <file name="app.js" path="C:\Users\pietr\tallerIng\app.js">
+        <metrics statements="101" coveredstatements="97" conditionals="27" coveredconditionals="19" methods="8" coveredmethods="7"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="39" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="40" count="2" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="49" count="10" type="stmt"/>
+        <line num="50" count="10" type="stmt"/>
+        <line num="51" count="10" type="stmt"/>
+        <line num="52" count="10" type="stmt"/>
+        <line num="56" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="57" count="2" type="stmt"/>
+        <line num="58" count="2" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="60" count="2" type="stmt"/>
+        <line num="61" count="2" type="stmt"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="66" count="12" type="stmt"/>
+        <line num="67" count="12" type="stmt"/>
+        <line num="68" count="12" type="stmt"/>
+        <line num="69" count="12" type="stmt"/>
+        <line num="74" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="88" count="3" type="stmt"/>
+        <line num="89" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="91" count="3" type="stmt"/>
+        <line num="93" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="94" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="98" count="2" type="stmt"/>
+        <line num="101" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="103" count="1" type="stmt"/>
+        <line num="106" count="3" type="stmt"/>
+        <line num="107" count="3" type="stmt"/>
+        <line num="109" count="3" type="stmt"/>
+        <line num="110" count="3" type="stmt"/>
+        <line num="112" count="3" type="stmt"/>
+        <line num="113" count="3" type="stmt"/>
+        <line num="114" count="3" type="stmt"/>
+        <line num="116" count="3" type="stmt"/>
+        <line num="117" count="3" type="stmt"/>
+        <line num="118" count="3" type="stmt"/>
+        <line num="120" count="3" type="stmt"/>
+        <line num="121" count="3" type="stmt"/>
+        <line num="123" count="3" type="stmt"/>
+        <line num="124" count="3" type="stmt"/>
+        <line num="126" count="3" type="stmt"/>
+        <line num="127" count="3" type="stmt"/>
+        <line num="128" count="3" type="stmt"/>
+        <line num="130" count="3" type="stmt"/>
+        <line num="131" count="3" type="stmt"/>
+        <line num="132" count="3" type="stmt"/>
+        <line num="134" count="3" type="stmt"/>
+        <line num="135" count="3" type="stmt"/>
+        <line num="136" count="3" type="stmt"/>
+        <line num="138" count="3" type="stmt"/>
+        <line num="139" count="3" type="stmt"/>
+        <line num="140" count="3" type="stmt"/>
+        <line num="142" count="3" type="stmt"/>
+        <line num="143" count="3" type="stmt"/>
+        <line num="144" count="3" type="stmt"/>
+        <line num="145" count="3" type="stmt"/>
+        <line num="147" count="3" type="stmt"/>
+        <line num="148" count="3" type="stmt"/>
+        <line num="149" count="3" type="stmt"/>
+        <line num="154" count="8" type="stmt"/>
+        <line num="155" count="8" type="stmt"/>
+        <line num="156" count="8" type="stmt"/>
+        <line num="157" count="8" type="stmt"/>
+        <line num="158" count="8" type="stmt"/>
+        <line num="159" count="8" type="stmt"/>
+        <line num="160" count="8" type="stmt"/>
+        <line num="162" count="8" type="cond" truecount="9" falsecount="0"/>
+        <line num="163" count="2" type="stmt"/>
+        <line num="166" count="6" type="stmt"/>
+        <line num="167" count="6" type="stmt"/>
+        <line num="168" count="6" type="stmt"/>
+        <line num="169" count="6" type="stmt"/>
+        <line num="170" count="6" type="stmt"/>
+        <line num="171" count="6" type="stmt"/>
+        <line num="172" count="6" type="stmt"/>
+        <line num="173" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="tallerIng.classes">
+      <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="barbero.js" path="C:\Users\pietr\tallerIng\classes\barbero.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="6" type="stmt"/>
+        <line num="4" count="6" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+      </file>
+      <file name="reserva.js" path="C:\Users\pietr\tallerIng\classes\reserva.js">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="3" count="7" type="stmt"/>
+        <line num="4" count="7" type="stmt"/>
+        <line num="5" count="7" type="stmt"/>
+        <line num="6" count="7" type="stmt"/>
+        <line num="7" count="7" type="stmt"/>
+        <line num="8" count="7" type="stmt"/>
+        <line num="9" count="7" type="stmt"/>
+      </file>
+      <file name="servicios.js" path="C:\Users\pietr\tallerIng\classes\servicios.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
