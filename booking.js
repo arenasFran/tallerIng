@@ -128,11 +128,11 @@ bookingForm.addEventListener("submit", (e) => {
   }
 
 
-  const selectedDate = new Date(fecha);
+  const selectedDate = new Date(fecha + 'T00:00:00');
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  if (selectedDate < today) {
+  if (selectedDate.getTime() < today.getTime()) {
     feedback.textContent = 'No se pueden hacer reservas para fechas pasadas';
     feedback.classList.add('show-feedback', 'error-feedback');
     setTimeout(() => {
