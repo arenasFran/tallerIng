@@ -81,9 +81,14 @@ function actualizarHoras(fecha) {
     }
 
 
+    // Solo bloquear horas pasadas si es HOY
     const today = new Date();
-    const selectedDate = new Date(fecha);
-    if (selectedDate.toDateString() === today.toDateString()) {
+    today.setHours(0, 0, 0, 0); // Reset to midnight for date comparison
+    
+    const selectedDate = new Date(fecha + 'T00:00:00');
+    
+    // Comparar solo las fechas (sin tiempo)
+    if (selectedDate.getTime() === today.getTime()) {
       const [horaHora, horaMinuto] = hora.split(':').map(Number);
       const now = new Date();
       const currentHour = now.getHours();
