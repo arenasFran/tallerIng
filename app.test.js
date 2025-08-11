@@ -1,4 +1,5 @@
-import { renderBookings, loadSelects, Barbero, Servicio, Reserva, reserva } from './app.js';
+import { renderBookings, loadSelects, Barbero, Servicio, Reserva } from './app.js';
+import { reserva } from './booking.js';
 
 test('loadSelects carga correctamente barberos y servicios', () => {
   document.body.innerHTML = `

@@ -150,27 +150,6 @@ function renderBookings(reservas) {
   });
 }
 
-export function reserva(reservasArray) {
-  const fecha = document.getElementById('fecha').value;
-  const hora = document.getElementById('horaSelect').value;
-  const nombreBarbero = document.getElementById('barberoSelect').value;
-  const celCliente = document.getElementById('celCliente').value.trim();
-  const mailCliente = document.getElementById('mailCliente').value.trim();
-  const nombreCliente = document.getElementById('nombreCliente').value.trim();
-  const servicio = document.getElementById('servicioSelect').value;
-  
-  if (!fecha || !hora || !nombreBarbero || !celCliente || !mailCliente || !nombreCliente || !servicio) {
-    return false;
-  }
 
-  const nuevaReserva = new Reserva(fecha, hora, servicio, nombreBarbero, celCliente, mailCliente, nombreCliente);
-  reservasArray.push(nuevaReserva);
-  localStorage.setItem('reservas', JSON.stringify(reservasArray));
-  document.querySelector("#nombreCliente").value = "";
-  document.querySelector("#celCliente").value = "";
-  document.querySelector("#mailCliente").value = "";
-  document.querySelector("#fecha").value = "";
-  return true;
-}
 
 export { Reserva, Servicio, Barbero, loadSelects, renderBookings, reservas };

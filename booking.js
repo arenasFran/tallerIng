@@ -1,5 +1,10 @@
 import Reserva from "./classes/reserva.js";
 
+const fechaInput = document.getElementById("fecha");
+const horaSelect = document.getElementById("horaSelect");
+const bookingForm = document.getElementById("bookingForm");
+const feedback = document.getElementById("bookingFeedback");
+
 document
   .getElementById("barberoSelect")
   .addEventListener("change", () => {
@@ -11,13 +16,6 @@ const reservasGuardadas = localStorage.getItem("reservas");
 if (reservasGuardadas) {
   reservas = JSON.parse(reservasGuardadas);
 }
-
-
-const fechaInput = document.getElementById("fecha");
-const horaSelect = document.getElementById("horaSelect");
-const bookingForm = document.getElementById("bookingForm");
-const feedback = document.getElementById("bookingFeedback");
-
 
 function setMinDate() {
   const today = new Date();
@@ -31,7 +29,6 @@ function setMinDate() {
 
 setMinDate();
 
-
 function generarHorarios() {
   const horarios = [];
   for (let h = 9; h <= 20; h++) {
@@ -40,7 +37,6 @@ function generarHorarios() {
   }
   return horarios;
 }
-
 
 function actualizarHoras(fecha) {
   horaSelect.innerHTML = "";
@@ -61,18 +57,15 @@ function actualizarHoras(fecha) {
     .filter((r) => r.fecha === fecha && r.nombreBarbero === nombreBarbero)
     .map((r) => r.hora);
 
-
   const opcionVacia = document.createElement("option");
   opcionVacia.value = "";
   opcionVacia.textContent = "Seleccione una hora";
   horaSelect.appendChild(opcionVacia);
 
-
   horarios.forEach((hora) => {
     const opcion = document.createElement("option");
     opcion.value = hora;
     opcion.textContent = hora;
-
 
     if (horasReservadas.includes(hora)) {
       opcion.disabled = true;
@@ -80,14 +73,11 @@ function actualizarHoras(fecha) {
       opcion.style.color = "#999";
     }
 
-
-    // Solo bloquear horas pasadas si es HOY
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // Reset to midnight for date comparison
+    today.setHours(0, 0, 0, 0); 
     
     const selectedDate = new Date(fecha + 'T00:00:00');
     
-    // Comparar solo las fechas (sin tiempo)
     if (selectedDate.getTime() === today.getTime()) {
       const [horaHora, horaMinuto] = hora.split(':').map(Number);
       const now = new Date();
@@ -105,15 +95,13 @@ function actualizarHoras(fecha) {
   });
 }
 
-
 fechaInput.addEventListener("change", (e) => {
   actualizarHoras(e.target.value);
   horaSelect.value = "";
 });
 
-bookingForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
+// Función exportada que crea la reserva y actualiza la UI
+export function reserva(reservasArray) {
   const fecha = fechaInput.value;
   const hora = horaSelect.value;
   const nombreBarbero = document.getElementById("barberoSelect").value;
@@ -129,9 +117,8 @@ bookingForm.addEventListener("submit", (e) => {
       feedback.textContent = '';
       feedback.classList.remove('show-feedback', 'error-feedback');
     }, 3000);
-    return;
+    return false;
   }
-
 
   const selectedDate = new Date(fecha + 'T00:00:00');
   const today = new Date();
@@ -144,9 +131,8 @@ bookingForm.addEventListener("submit", (e) => {
       feedback.textContent = '';
       feedback.classList.remove('show-feedback', 'error-feedback');
     }, 3000);
-    return;
+    return false;
   }
-
 
   if (selectedDate.getTime() === today.getTime()) {
     const now = new Date();
@@ -161,12 +147,11 @@ bookingForm.addEventListener("submit", (e) => {
         feedback.textContent = '';
         feedback.classList.remove('show-feedback', 'error-feedback');
       }, 3000);
-      return;
+      return false;
     }
   }
 
-
-  const yaReservado = reservas.some(
+  const yaReservado = reservasArray.some(
     (r) => r.fecha === fecha && r.hora === hora && r.nombreBarbero === nombreBarbero
   );
   if (yaReservado) {
@@ -176,7 +161,7 @@ bookingForm.addEventListener("submit", (e) => {
       feedback.textContent = '';
       feedback.classList.remove('show-feedback', 'error-feedback');
     }, 3000);
-    return;
+    return false;
   }
 
   const nuevaReserva = new Reserva(
@@ -188,12 +173,9 @@ bookingForm.addEventListener("submit", (e) => {
     mailCliente,
     nombreCliente
   );
-  console.log("Nueva reserva:", nuevaReserva);
-  reservas.push(nuevaReserva);
+  reservasArray.push(nuevaReserva);
 
-
-  localStorage.setItem("reservas", JSON.stringify(reservas));
-
+  localStorage.setItem("reservas", JSON.stringify(reservasArray));
 
   feedback.textContent = "¡Reserva realizada con éxito!";
   feedback.classList.add("show-feedback");
@@ -202,28 +184,29 @@ bookingForm.addEventListener("submit", (e) => {
     feedback.classList.remove("show-feedback");
   }, 3000);
 
-
   bookingForm.reset();
 
-
   actualizarHoras(fecha);
-
 
   fechaInput.value = "";
   horaSelect.disabled = true;
   horaSelect.innerHTML = `<option value="">Seleccione una fecha primero</option>`;
 
-
   const bookingList = document.getElementById('bookingList');
   if (bookingList) {
-
     import('./app.js').then(module => {
-      module.renderBookings(reservas);
+      module.renderBookings(reservasArray);
     }).catch(err => {
       console.log('No se pudo actualizar la lista de reservas:', err);
     });
   }
+
+  return true;
+}
+
+bookingForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  reserva(reservas);
 });
 
-
-actualizarHoras(null); 
+actualizarHoras(null);
