@@ -5,12 +5,6 @@ const horaSelect = document.getElementById("horaSelect");
 const bookingForm = document.getElementById("bookingForm");
 const feedback = document.getElementById("bookingFeedback");
 
-document
-  .getElementById("barberoSelect")
-  .addEventListener("change", () => {
-    actualizarHoras(fechaInput.value);
-  });
-
 let reservas = [];
 const reservasGuardadas = localStorage.getItem("reservas");
 if (reservasGuardadas) {
@@ -24,7 +18,7 @@ function setMinDate() {
   const day = String(today.getDate()).padStart(2, '0');
   const todayString = `${year}-${month}-${day}`;
 
-  fechaInput.min = todayString;
+  //fechaInput.min = todayString;
 }
 
 setMinDate();
@@ -38,7 +32,8 @@ function generarHorarios() {
   return horarios;
 }
 
-function actualizarHoras(fecha) {
+export function actualizarHoras(fecha) {
+  const horaSelect = document.getElementById("horaSelect");
   horaSelect.innerHTML = "";
 
   if (!fecha) {
@@ -74,10 +69,10 @@ function actualizarHoras(fecha) {
     }
 
     const today = new Date();
-    today.setHours(0, 0, 0, 0); 
-    
+    today.setHours(0, 0, 0, 0);
+
     const selectedDate = new Date(fecha + 'T00:00:00');
-    
+
     if (selectedDate.getTime() === today.getTime()) {
       const [horaHora, horaMinuto] = hora.split(':').map(Number);
       const now = new Date();
@@ -95,13 +90,12 @@ function actualizarHoras(fecha) {
   });
 }
 
-fechaInput.addEventListener("change", (e) => {
-  actualizarHoras(e.target.value);
-  horaSelect.value = "";
-});
-
 // Función exportada que crea la reserva y actualiza la UI
 export function reserva(reservasArray) {
+  const fechaInput = document.getElementById("fecha");
+  const horaSelect = document.getElementById("horaSelect");
+  const bookingForm = document.getElementById("bookingForm");
+  const feedback = document.getElementById("bookingFeedback");
   const fecha = fechaInput.value;
   const hora = horaSelect.value;
   const nombreBarbero = document.getElementById("barberoSelect").value;
@@ -169,7 +163,7 @@ export function reserva(reservasArray) {
     hora,
     servicio,
     nombreBarbero,
-    celCliente,  
+    celCliente,
     mailCliente,
     nombreCliente
   );
@@ -185,6 +179,9 @@ export function reserva(reservasArray) {
   }, 3000);
 
   bookingForm.reset();
+  document.getElementById('nombreCliente').value = '';
+  document.getElementById('celCliente').value = '';
+  document.getElementById('mailCliente').value = '';
 
   actualizarHoras(fecha);
 
@@ -204,9 +201,4 @@ export function reserva(reservasArray) {
   return true;
 }
 
-bookingForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  reserva(reservas);
-});
-
-actualizarHoras(null);
+//actualizarHoras(null);

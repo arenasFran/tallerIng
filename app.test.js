@@ -3,8 +3,17 @@ import { reserva } from './booking.js';
 
 test('loadSelects carga correctamente barberos y servicios', () => {
   document.body.innerHTML = `
-    <select id="servicioSelect"></select>
-    <select id="barberoSelect"></select>
+    <form id="bookingForm">
+      <input id="fecha" value="2025-08-10">
+      <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
+      <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
+      <input id="celCliente" value="12345678">
+      <input id="mailCliente" value="test@test.com">
+      <input id="nombreCliente" value="Fran">
+      <select id="servicioSelect"><option value="Corte" selected>Corte</option></select>
+      <div id="bookingFeedback"></div>
+    </form>
+    <ul id="bookingList"></ul>
   `;
 
   loadSelects();
@@ -21,8 +30,17 @@ test('loadSelects carga correctamente barberos y servicios', () => {
 
 test('loadSelects coloca placeholders correctamente', () => {
   document.body.innerHTML = `
-    <select id="servicioSelect"></select>
-    <select id="barberoSelect"></select>
+    <form id="bookingForm">
+      <input id="fecha" value="2025-08-10">
+      <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
+      <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
+      <input id="celCliente" value="12345678">
+      <input id="mailCliente" value="test@test.com">
+      <input id="nombreCliente" value="Fran">
+      <select id="servicioSelect"><option value="Corte" selected>Corte</option></select>
+      <div id="bookingFeedback"></div>
+    </form>
+    <ul id="bookingList"></ul>
   `;
 
   loadSelects();
@@ -76,7 +94,7 @@ test('renderiza reservas correctamente', () => {
 test('creates and stores a new reservation correctly', () => {
   document.body.innerHTML = `
       <form id="bookingForm">
-      <input id="fecha" value="2025-08-10">
+      <input id="fecha" value="2026-08-10">
       <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
       <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
       <input id="celCliente" value="12345678">
@@ -97,7 +115,7 @@ test('creates and stores a new reservation correctly', () => {
   expect(reservas[0].nombreCliente).toBe('Fran');
   //expect(reservas[0].celCliente).toBe('12345678');
   expect(reservas[0].mailCliente).toBe('test@test.com');
-  expect(reservas[0].fecha).toBe('2025-08-10');
+  expect(reservas[0].fecha).toBe('2026-08-10');
   expect(reservas[0].hora).toBe('15:00');
   expect(reservas[0].nombreBarbero).toBe('Joaquín Rojas');
   expect(reservas[0].servicio).toBe('Corte');
@@ -143,12 +161,35 @@ describe('Función reserva()', () => {
   });
 
   test('no sobrescribe reservas existentes', () => {
+    document.body.innerHTML = `
+      <form id="bookingForm">
+        <input id="fecha" value="2026-08-10">
+        <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
+        <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
+        <input id="celCliente" value="12345678">
+        <input id="mailCliente" value="test@test.com">
+        <input id="nombreCliente" value="Fran">
+        <select id="servicioSelect"><option value="Corte" selected>Corte</option></select>
+        <div id="bookingFeedback"></div>
+      </form>
+      <ul id="bookingList"></ul>
+    `;
+    const reservas = [];
     reserva(reservas);
 
-    document.getElementById('nombreCliente').value = 'Juan';
-    document.getElementById('fecha').value = '2025-08-10';
-    document.getElementById('celCliente').value = '123456768';
-    document.getElementById('mailCliente').value = 'Juan@gmail.com';
+    document.body.innerHTML = `
+      <form id="bookingForm">
+        <input id="fecha" value="2027-08-10">
+        <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
+        <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
+        <input id="celCliente" value="12345678">
+        <input id="mailCliente" value="test@test.com">
+        <input id="nombreCliente" value="Juan">
+        <select id="servicioSelect"><option value="Corte" selected>Corte</option></select>
+        <div id="bookingFeedback"></div>
+      </form>
+      <ul id="bookingList"></ul>
+    `;
     reserva(reservas);
 
     const storedReservas = JSON.parse(localStorage.getItem('reservas'));
@@ -181,22 +222,21 @@ describe('Función reserva()', () => {
   test('resetea el formulario luego de hacer una reserva', () => {
     document.body.innerHTML = `
     <form id="bookingForm">
-      <input id="fecha" value="2025-08-10">
+      <input id="fecha" value="2026-08-10">
       <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
       <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
       <input id="celCliente" value="12345678">
       <input id="mailCliente" value="test@test.com">
-      <input id="nombreCliente" value="Fran">
+      <input id="nombreCliente" value="Franco">
       <select id="servicioSelect"><option value="Corte" selected>Corte</option></select>
       <div id="bookingFeedback"></div>
     </form>
     <ul id="bookingList"></ul>
   `;
 
-    // Espía el método reset del formulario
-    const form = document.getElementById('bookingForm');
     const reservas = [];
     reserva(reservas);
+    
     const nombreClie = document.getElementById('nombreCliente').value;
     const fecha = document.getElementById('fecha').value;
     const celCliente = document.getElementById('celCliente').value;
@@ -225,6 +265,20 @@ describe('Función reserva()', () => {
   });
 
   test('reserva se ejecuta correctamente con evento submit', () => {
+    document.body.innerHTML = `
+      <form id="bookingForm">
+        <input id="fecha" value="2026-08-10">
+        <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
+        <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
+        <input id="celCliente" value="12345678">
+        <input id="mailCliente" value="test@test.com">
+        <input id="nombreCliente" value="Fran">
+        <select id="servicioSelect"><option value="Corte" selected>Corte</option></select>
+        <div id="bookingFeedback"></div>
+      </form>
+      <ul id="bookingList"></ul>
+    `;
+    let reservas = [];
     const form = document.getElementById('bookingForm');
 
     let preventDefaultCalled = false;
@@ -269,11 +323,11 @@ describe('Validación de fechas y horas', () => {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     const tomorrowString = tomorrow.toISOString().split('T')[0];
-    
+
     document.getElementById('fecha').value = tomorrowString;
-    
+
     const result = reserva(reservas);
-    
+
     expect(result).toBe(true);
     expect(reservas).toHaveLength(1);
   });
@@ -282,29 +336,43 @@ describe('Validación de fechas y horas', () => {
     const today = new Date();
     const todayString = today.toISOString().split('T')[0];
     const futureHour = `${today.getHours() + 2}:00`;
-    
+
     document.getElementById('fecha').value = todayString;
     document.getElementById('horaSelect').innerHTML = `<option value="${futureHour}" selected>${futureHour}</option>`;
-    
+
     const result = reserva(reservas);
-    
+
     expect(result).toBe(true);
     expect(reservas).toHaveLength(1);
   });
 
   test('permite múltiples reservas para diferentes horarios', () => {
+    document.body.innerHTML = `
+      <form id="bookingForm">
+        <input id="fecha" value="2026-08-10">
+        <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
+        <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
+        <input id="celCliente" value="12345678">
+        <input id="mailCliente" value="test@test.com">
+        <input id="nombreCliente" value="Fran">
+        <select id="servicioSelect"><option value="Corte" selected>Corte</option></select>
+        <div id="bookingFeedback"></div>
+      </form>
+      <ul id="bookingList"></ul>
+    `;
+    let reservas = [];
     // Primera reserva
     reserva(reservas);
-    
+
     // Segunda reserva para diferente hora - necesitamos rellenar los campos que se limpiaron
-    document.getElementById('fecha').value = '2025-08-10';
+    document.getElementById('fecha').value = '2026-08-10';
     document.getElementById('horaSelect').innerHTML = '<option value="16:00" selected>16:00</option>';
     document.getElementById('celCliente').value = '12345678';
     document.getElementById('mailCliente').value = 'test@test.com';
     document.getElementById('nombreCliente').value = 'Fran';
-    
+
     const result = reserva(reservas);
-    
+
     expect(result).toBe(true);
     expect(reservas).toHaveLength(2);
   });
@@ -333,45 +401,45 @@ describe('Validación de formulario', () => {
 
   test('no crea reserva si falta el servicio', () => {
     document.getElementById('servicioSelect').innerHTML = '<option value="">Selecciona un servicio</option>';
-    
+
     const result = reserva(reservas);
-    
+
     expect(result).toBe(false);
     expect(reservas).toHaveLength(0);
   });
 
   test('no crea reserva si falta el barbero', () => {
     document.getElementById('barberoSelect').innerHTML = '<option value="">Selecciona un barbero</option>';
-    
+
     const result = reserva(reservas);
-    
+
     expect(result).toBe(false);
     expect(reservas).toHaveLength(0);
   });
 
   test('no crea reserva si falta la hora', () => {
     document.getElementById('horaSelect').innerHTML = '<option value="">Selecciona una hora</option>';
-    
+
     const result = reserva(reservas);
-    
+
     expect(result).toBe(false);
     expect(reservas).toHaveLength(0);
   });
 
   test('no crea reserva si falta el celular', () => {
     document.getElementById('celCliente').value = '';
-    
+
     const result = reserva(reservas);
-    
+
     expect(result).toBe(false);
     expect(reservas).toHaveLength(0);
   });
 
   test('no crea reserva si falta el email', () => {
     document.getElementById('mailCliente').value = '';
-    
+
     const result = reserva(reservas);
-    
+
     expect(result).toBe(false);
     expect(reservas).toHaveLength(0);
   });
@@ -380,9 +448,9 @@ describe('Validación de formulario', () => {
     document.getElementById('nombreCliente').value = '   ';
     document.getElementById('celCliente').value = '   ';
     document.getElementById('mailCliente').value = '   ';
-    
+
     const result = reserva(reservas);
-    
+
     expect(result).toBe(false);
     expect(reservas).toHaveLength(0);
   });
@@ -391,7 +459,7 @@ describe('Validación de formulario', () => {
 describe('Clases y objetos', () => {
   test('crea instancia de Barbero correctamente', () => {
     const barbero = new Barbero('Juan', 'Pérez', 'Especialista en cortes');
-    
+
     expect(barbero.nombre).toBe('Juan');
     expect(barbero.apellido).toBe('Pérez');
     expect(barbero.especialidad).toBe('Especialista en cortes');
@@ -399,14 +467,14 @@ describe('Clases y objetos', () => {
 
   test('crea instancia de Servicio correctamente', () => {
     const servicio = new Servicio('Corte Premium', 800);
-    
+
     expect(servicio.nombreServicio).toBe('Corte Premium');
     expect(servicio.precio).toBe(800);
   });
 
   test('crea instancia de Reserva correctamente', () => {
     const reserva = new Reserva('2025-08-10', '15:00', 'Corte', 'Juan Pérez', '12345678', 'test@test.com', 'Fran');
-    
+
     expect(reserva.fecha).toBe('2025-08-10');
     expect(reserva.hora).toBe('15:00');
     expect(reserva.servicio).toBe('Corte');
@@ -426,12 +494,12 @@ describe('Renderizado de reservas', () => {
     ];
 
     document.body.innerHTML = `<ul id="bookingList"></ul>`;
-    
+
     renderBookings(reservas);
-    
+
     const bookingList = document.getElementById('bookingList');
     const items = bookingList.querySelectorAll('.booking-item');
-    
+
     // Debería estar ordenado por fecha (más antigua primero) y luego por hora
     expect(items[0].querySelector('.booking-date').textContent).toBe('2025-08-09 - 14:00');
     expect(items[1].querySelector('.booking-date').textContent).toBe('2025-08-10 - 15:00');
@@ -444,9 +512,9 @@ describe('Renderizado de reservas', () => {
     ];
 
     document.body.innerHTML = `<ul id="bookingList"></ul>`;
-    
+
     renderBookings(reservas);
-    
+
     const li = document.querySelector('.booking-item');
     expect(li.querySelector('.booking-client').textContent).toBe('Fran');
     expect(li.querySelector('.booking-date').textContent).toBe('2025-08-10 - 15:00');
@@ -479,11 +547,25 @@ describe('Persistencia de datos', () => {
   });
 
   test('guarda reservas en localStorage', () => {
+    document.body.innerHTML = `
+      <form id="bookingForm">
+        <input id="fecha" value="2026-08-10">
+        <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
+        <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
+        <input id="celCliente" value="12345678">
+        <input id="mailCliente" value="test@test.com">
+        <input id="nombreCliente" value="Fran">
+        <select id="servicioSelect"><option value="Corte" selected>Corte</option></select>
+        <div id="bookingFeedback"></div>
+      </form>
+      <ul id="bookingList"></ul>
+    `;
+    let reservas = [];
     reserva(reservas);
-    
+
     const storedData = localStorage.getItem('reservas');
     expect(storedData).not.toBeNull();
-    
+
     const parsedData = JSON.parse(storedData);
     expect(parsedData).toHaveLength(1);
     expect(parsedData[0].nombreCliente).toBe('Fran');
@@ -499,12 +581,12 @@ describe('Persistencia de datos', () => {
       mailCliente: 'test@test.com',
       nombreCliente: 'Fran'
     };
-    
+
     localStorage.setItem('reservas', JSON.stringify([reservaExistente]));
-    
+
     const reservasGuardadas = localStorage.getItem('reservas');
     const reservasCargadas = JSON.parse(reservasGuardadas);
-    
+
     expect(reservasCargadas).toHaveLength(1);
     expect(reservasCargadas[0].nombreCliente).toBe('Fran');
   });
@@ -532,50 +614,90 @@ describe('Casos edge y validaciones especiales', () => {
   });
 
   test('maneja reservas con caracteres especiales en nombres', () => {
+    document.body.innerHTML = `
+      <form id="bookingForm">
+        <input id="fecha" value="2026-08-10">
+        <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
+        <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
+        <input id="celCliente" value="12345678">
+        <input id="mailCliente" value="test@test.com">
+        <input id="nombreCliente" value="Fran">
+        <select id="servicioSelect"><option value="Corte" selected>Corte</option></select>
+        <div id="bookingFeedback"></div>
+      </form>
+      <ul id="bookingList"></ul>
+    `;
     document.getElementById('nombreCliente').value = 'José María O\'Connor';
     document.getElementById('mailCliente').value = 'josé.maría@test.com';
-    
+
     const result = reserva(reservas);
-    
+
     expect(result).toBe(true);
     expect(reservas[0].nombreCliente).toBe('José María O\'Connor');
     expect(reservas[0].mailCliente).toBe('josé.maría@test.com');
   });
 
   test('valida formato de email básico', () => {
+    document.body.innerHTML = `
+      <form id="bookingForm">
+        <input id="fecha" value="2026-08-10">
+        <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
+        <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
+        <input id="celCliente" value="12345678">
+        <input id="mailCliente" value="test@test.com">
+        <input id="nombreCliente" value="Fran">
+        <select id="servicioSelect"><option value="Corte" selected>Corte</option></select>
+        <div id="bookingFeedback"></div>
+      </form>
+      <ul id="bookingList"></ul>
+    `;
     // Email válido
     document.getElementById('mailCliente').value = 'usuario@dominio.com';
     let result = reserva(reservas);
     expect(result).toBe(true);
-    
+
     // Limpiar para siguiente test
     reservas.length = 0;
     localStorage.clear();
-    
+
     // Email inválido (sin @) - la app solo valida que no esté vacío, no el formato
-    document.getElementById('fecha').value = '2025-08-10';
+    document.getElementById('fecha').value = '2029-08-10';
     document.getElementById('horaSelect').innerHTML = '<option value="15:00" selected>15:00</option>';
     document.getElementById('celCliente').value = '12345678';
     document.getElementById('nombreCliente').value = 'Fran';
     document.getElementById('mailCliente').value = 'usuario.com';
-    
+
     result = reserva(reservas);
     expect(result).toBe(true); // La función no valida formato de email, solo que no esté vacío
   });
 
   test('maneja múltiples reservas del mismo cliente', () => {
+    document.body.innerHTML = `
+      <form id="bookingForm">
+        <input id="fecha" value="2026-08-10">
+        <select id="horaSelect"><option value="15:00" selected>15:00</option></select>
+        <select id="barberoSelect"><option value="Joaquín Rojas" selected>Joaquín Rojas</option></select>
+        <input id="celCliente" value="12345678">
+        <input id="mailCliente" value="test@test.com">
+        <input id="nombreCliente" value="Fran">
+        <select id="servicioSelect"><option value="Corte" selected>Corte</option></select>
+        <div id="bookingFeedback"></div>
+      </form>
+      <ul id="bookingList"></ul>
+    `;
+    const reservas = [];
     // Primera reserva
     reserva(reservas);
-    
+
     // Segunda reserva del mismo cliente - necesitamos rellenar los campos que se limpiaron
-    document.getElementById('fecha').value = '2025-08-11';
+    document.getElementById('fecha').value = '2026-08-11';
     document.getElementById('horaSelect').innerHTML = '<option value="16:00" selected>16:00</option>';
     document.getElementById('celCliente').value = '12345678';
     document.getElementById('mailCliente').value = 'test@test.com';
     document.getElementById('nombreCliente').value = 'Fran';
-    
+
     const result = reserva(reservas);
-    
+
     expect(result).toBe(true);
     expect(reservas).toHaveLength(2);
     expect(reservas[0].nombreCliente).toBe('Fran');
